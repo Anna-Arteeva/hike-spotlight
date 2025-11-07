@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
-import SidebarEventCard from "@/components/SidebarEventCard";
+import { EventsListPanel } from "@/components/sidebar/EventsListPanel";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -185,64 +185,8 @@ const Index = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="w-80 flex-shrink-0">
-            <div className="bg-muted/30 rounded-lg p-4 mb-6">
-              <h3 className="font-semibold mb-4">Your upcoming events</h3>
-              
-              <SidebarEventCard
-                date="Jun 30"
-                dayOfWeek="Sat"
-                title="Full-carpool After Work hike to Kampenwand"
-                time="6:45"
-                from="Munich"
-                transport="Train"
-                activity="Medium"
-                distance="18km"
-                elevation="560m"
-                participants="+14"
-                organizer="Jean-Christian"
-                organizerAvatar=""
-                status="full"
-              />
-              
-              <div className="mt-4">
-                <SidebarEventCard
-                  date="Jun 30"
-                  dayOfWeek="Sat"
-                  title="Full-carpool After Work hike to Kampenwand"
-                  time="6:45"
-                  from="Munich"
-                  transport="Train"
-                  activity="Medium"
-                  distance="18km"
-                  elevation="560m"
-                  participants="+14"
-                  organizer="Jean-Christian"
-                  organizerAvatar=""
-                  status="full"
-                />
-              </div>
-            </div>
-            
-            <div className="bg-muted/30 rounded-lg p-4">
-              <h3 className="font-semibold mb-4">Your past events</h3>
-              
-              <SidebarEventCard
-                date="Jun 30"
-                dayOfWeek="Sat"
-                title="Full-carpool After Work hike to Kampenwand"
-                time="6:45"
-                from="Munich"
-                transport="Train"
-                activity="Medium"
-                distance="18km"
-                elevation="560m"
-                participants="+14"
-                organizer="Jean-Christian"
-                organizerAvatar=""
-                images={[event1, event2, event3]}
-              />
-            </div>
+          <div className="w-auto flex-shrink-0">
+            <EventsListPanel />
           </div>
         </div>
       </div>
