@@ -20,6 +20,7 @@ interface EventCardProps {
   participants: number;
   availableSpots: number;
   participantAvatars: string[];
+  onClick?: () => void;
 }
 
 const EventCard = ({
@@ -40,6 +41,7 @@ const EventCard = ({
   participants,
   availableSpots,
   participantAvatars,
+  onClick,
 }: EventCardProps) => {
   const TransportIcon = transport === "train" ? Train : transport === "bus" ? Bus : null;
   const ActivityIcon = activity === "hiking" ? Mountain : Bike;
@@ -54,7 +56,10 @@ const EventCard = ({
   };
 
   return (
-    <div className="flex gap-6 py-4 border-b border-border last:border-0">
+    <div 
+      className="flex gap-6 py-4 border-b border-border last:border-0 hover:bg-accent/5 transition-colors cursor-pointer -mx-6 px-6"
+      onClick={onClick}
+    >
       <div className="flex flex-col items-end gap-1 w-16">
         <div className="text-sm font-medium">{time}</div>
         <div className="text-xs text-muted-foreground">{timeSubtext}</div>

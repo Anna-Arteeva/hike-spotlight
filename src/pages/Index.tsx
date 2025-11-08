@@ -1,6 +1,8 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
 import { EventsListPanel } from "@/components/sidebar/EventsListPanel";
+import { EventDetailsModal } from "@/components/event-details/EventDetailsModal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
@@ -12,6 +14,8 @@ import event5 from "@/assets/event5.jpg";
 import event6 from "@/assets/event6.jpg";
 
 const Index = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -75,6 +79,7 @@ const Index = () => {
                 participants={12}
                 availableSpots={4}
                 participantAvatars={["", "", "", "", ""]}
+                onClick={() => setIsModalOpen(true)}
               />
               
               <EventCard
@@ -95,6 +100,7 @@ const Index = () => {
                 participants={20}
                 availableSpots={20}
                 participantAvatars={["", "", "", "", ""]}
+                onClick={() => setIsModalOpen(true)}
               />
               
               <EventCard
@@ -115,6 +121,7 @@ const Index = () => {
                 participants={12}
                 availableSpots={4}
                 participantAvatars={["", "", "", "", ""]}
+                onClick={() => setIsModalOpen(true)}
               />
               
               <EventCard
@@ -135,6 +142,7 @@ const Index = () => {
                 participants={20}
                 availableSpots={20}
                 participantAvatars={["", "", "", "", ""]}
+                onClick={() => setIsModalOpen(true)}
               />
             </div>
             
@@ -160,6 +168,7 @@ const Index = () => {
                 participants={12}
                 availableSpots={4}
                 participantAvatars={["", "", "", "", ""]}
+                onClick={() => setIsModalOpen(true)}
               />
               
               <EventCard
@@ -180,6 +189,7 @@ const Index = () => {
                 participants={20}
                 availableSpots={20}
                 participantAvatars={["", "", "", "", ""]}
+                onClick={() => setIsModalOpen(true)}
               />
             </div>
           </div>
@@ -190,6 +200,8 @@ const Index = () => {
           </div>
         </div>
       </div>
+
+      <EventDetailsModal open={isModalOpen} onOpenChange={setIsModalOpen} />
     </div>
   );
 };
