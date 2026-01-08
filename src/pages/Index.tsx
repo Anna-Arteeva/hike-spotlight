@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
-import { EventsListPanel } from "@/components/sidebar/EventsListPanel";
+import { EventsSidebar } from "@/components/sidebar/EventsSidebar";
 import { EventDetailsModal } from "@/components/event-details/EventDetailsModal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -196,7 +196,7 @@ const Index = () => {
 
           {/* Sidebar */}
           <div className="w-auto flex-shrink-0">
-            <EventsListPanel />
+            <EventsSidebar />
           </div>
         </div>
       </div>
