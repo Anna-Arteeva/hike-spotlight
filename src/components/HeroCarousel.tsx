@@ -1,6 +1,7 @@
 "use client";
 import { ArrowRight } from "lucide-react";
 import { useState, useRef, useId, useEffect } from "react";
+import TypewriterText from "@/components/TypewriterText";
 import event1 from "@/assets/event1.jpg";
 import event2 from "@/assets/event2.jpg";
 import event3 from "@/assets/event3.jpg";
@@ -111,8 +112,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           current === index ? "opacity-100" : "opacity-0"
         }`}
       >
-        <h2 className="relative text-lg font-semibold text-white md:text-2xl lg:text-4xl">
-          {title}
+        <h2 className="relative text-lg font-semibold text-white md:text-2xl lg:text-4xl min-h-[1.5em]">
+          {current === index ? (
+            <TypewriterText speed={60} key={`${index}-${title}`}>
+              {title}
+            </TypewriterText>
+          ) : (
+            title
+          )}
         </h2>
 
         <div className="mt-4 flex justify-center">
