@@ -12,9 +12,9 @@
  */
 
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Mountain } from 'lucide-react';
+import { Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Header from '@/components/Header';
 import { useRouteFilters } from '@/hooks/useRouteFilters';
 import { routes, filterRoutes, sortRoutes, paginateRoutes } from '@/lib/routeUtils';
 import { FilterDrawer } from '@/components/routes/FilterDrawer';
@@ -44,21 +44,7 @@ export default function RoutesIndex() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-background sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-4">
-            <Link to="/">
-              <Button variant="ghost" size="icon" aria-label="Back to home">
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            </Link>
-            <div className="flex items-center gap-2">
-              <Mountain className="h-6 w-6 text-primary" />
-              <h1 className="text-xl font-bold text-foreground">Routes</h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="container mx-auto px-4 py-6">
         {/* Toolbar */}
