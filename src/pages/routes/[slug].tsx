@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import Header from '@/components/Header';
 import { getRouteBySlug, formatDistance, formatDuration, formatElevation } from '@/lib/routeUtils';
 import { DifficultyBadge } from '@/components/routes/DifficultyChips';
 import { ROUTE_TYPES, DIFFICULTY_LABELS } from '@/types/route';
@@ -31,6 +32,7 @@ export default function RouteDetail() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* Hero */}
       <div className="relative h-64 sm:h-80 bg-muted">
         <div className="absolute inset-0 flex items-center justify-center">
