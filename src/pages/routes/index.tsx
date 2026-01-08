@@ -17,10 +17,8 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import { useRouteFilters } from '@/hooks/useRouteFilters';
 import { routes, filterRoutes, sortRoutes, paginateRoutes } from '@/lib/routeUtils';
-import { FilterDrawer } from '@/components/routes/FilterDrawer';
-import { SortSelect } from '@/components/routes/SortSelect';
-import { ActiveFilterChips } from '@/components/routes/ActiveFilterChips';
-import { RouteCard, RouteCardSkeleton } from '@/components/routes/RouteCard';
+import { RoutesToolbar } from '@/components/routes/RoutesToolbar';
+import { RouteCard } from '@/components/routes/RouteCard';
 import {
   Pagination,
   PaginationContent,
@@ -47,28 +45,16 @@ export default function RoutesIndex() {
       <Header />
 
       <main className="container mx-auto px-4 py-6">
-        {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center mb-6">
-          <div className="flex items-center gap-3">
-            <FilterDrawer
-              filters={filters}
-              onUpdateFilters={updateFilters}
-              onClearFilters={clearFilters}
-              activeFilterCount={activeFilterCount}
-            />
-            <span className="text-sm text-muted-foreground">
-              {totalCount} route{totalCount !== 1 ? 's' : ''} found
-            </span>
-          </div>
-          <SortSelect value={sort} onChange={setSort} />
-        </div>
-
-        {/* Active filters */}
-        {activeFilterCount > 0 && (
-          <div className="mb-6">
-            <ActiveFilterChips filters={filters} onClearFilter={clearFilter} onClearAll={clearFilters} />
-          </div>
-        )}
+        <RoutesToolbar
+          filters={filters}
+          sort={sort}
+          totalCount={totalCount}
+          activeFilterCount={activeFilterCount}
+          onUpdateFilters={updateFilters}
+          onSetSort={setSort}
+          onClearFilters={clearFilters}
+          onClearFilter={clearFilter}
+        />
 
         {/* Results grid */}
         {paginatedRoutes.length > 0 ? (
