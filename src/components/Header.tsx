@@ -1,5 +1,4 @@
 import { Search, User } from "lucide-react";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
@@ -17,8 +16,8 @@ const Header = () => {
             </div>
             
             <nav className="hidden md:flex items-center gap-6">
-              <Link to="/" className="text-foreground font-medium">Events</Link>
-              <Link to="/routes" className="text-muted-foreground hover:text-foreground">Routes</Link>
+              <a href="#" className="text-foreground font-medium">Events</a>
+              <a href="#" className="text-muted-foreground hover:text-foreground">Routes</a>
               <a href="#" className="text-muted-foreground hover:text-foreground">Community</a>
               <a href="#" className="text-muted-foreground hover:text-foreground">Create event</a>
             </nav>
