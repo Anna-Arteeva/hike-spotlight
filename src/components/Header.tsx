@@ -4,7 +4,6 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import CreateEventModal from "./CreateEventModal";
-import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Header() {
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -66,9 +65,6 @@ export default function Header() {
                   />
                 </div>
               </div>
-
-              {/* Theme Switcher */}
-              <ThemeSwitcher />
 
               {/* Avatar */}
               <Avatar className="h-9 w-9">

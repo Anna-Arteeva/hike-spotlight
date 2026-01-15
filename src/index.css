@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,74 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base semantic colors */
-    --background: 225 20% 96%;
-    --foreground: 205 11% 21%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 205 11% 21%;
+    --card-foreground: 0 0% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 205 11% 21%;
+    --popover-foreground: 0 0% 20%;
 
-    --primary: 163 100% 34%;
+    --primary: 150 60% 45%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 225 20% 96%;
-    --secondary-foreground: 205 11% 21%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 225 20% 96%;
-    --muted-foreground: 207 8% 44%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 163 100% 34%;
+    --accent: 150 60% 45%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 6 100% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 18% 91%;
-    --input: 220 18% 91%;
-    --ring: 163 100% 34%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 150 60% 45%;
 
     --radius: 0.5rem;
     
-    --success: 163 100% 34%;
+    --success: 150 60% 45%;
     --success-foreground: 0 0% 100%;
     
-    --difficulty-e: 163 100% 34%;
-    --difficulty-e-plus: 6 100% 60%;
-    --difficulty-t: 198 100% 50%;
+    --difficulty-e: 150 60% 45%;
+    --difficulty-e-plus: 0 72% 51%;
+    --difficulty-t: 210 100% 50%;
 
-    /* Custom brand colors */
-    --brand: 163 100% 34%;
-    --brand-dark: 163 100% 29%;
-    --brand-outline: 220 18% 91%;
-    --brand-semitransparent: 160 61% 41%;
-    
-    --back: 225 20% 96%;
-    --outline: 224 26% 93%;
-    --outline-filled: 224 26% 93%;
-    
-    --text-default: 205 11% 21%;
-    --text-light: 207 8% 44%;
-    
-    --yellow: 42 100% 50%;
-    --red: 6 100% 60%;
-    --blue: 198 100% 50%;
-    --blue-mid: 202 100% 37%;
-    --blue-dark: 206 100% 32%;
-    
-    --sticky-pink: 346 100% 60%;
-
-    /* Sidebar colors */
     --sidebar-background: 0 0% 98%;
+
     --sidebar-foreground: 240 5.3% 26.1%;
+
     --sidebar-primary: 240 5.9% 10%;
+
     --sidebar-primary-foreground: 0 0% 98%;
+
     --sidebar-accent: 240 4.8% 95.9%;
+
     --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 18% 91%;
-    --sidebar-ring: 163 100% 34%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -108,7 +90,6 @@ All colors MUST be HSL.
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -126,6 +107,6 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-mulish;
+    @apply bg-background text-foreground;
   }
 }
