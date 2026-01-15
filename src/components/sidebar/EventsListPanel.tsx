@@ -128,7 +128,7 @@ export const EventsListPanel: React.FC = () => {
     <div className="flex flex-col gap-8 items-start px-6 py-8 rounded-xl bg-muted/30 w-[363px] max-md:gap-6 max-md:px-5 max-md:py-6 max-md:w-full max-md:max-w-[500px] max-sm:gap-5 max-sm:px-4 max-sm:py-5 max-sm:w-full">
       <header className="flex gap-2.5 items-center self-stretch pb-4 border-b border-border">
         <h2 className="text-lg font-bold text-foreground max-sm:text-base">
-          Your upcoming events
+          Your next events
         </h2>
       </header>
 

@@ -39,6 +39,12 @@ export default function Header() {
                 >
                   Routes
                 </Link>
+                <Link
+                  to="/community"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Community
+                </Link>
                 <button
                   onClick={() => setIsCreateEventModalOpen(true)}
                   className="text-muted-foreground hover:text-foreground transition-colors"
