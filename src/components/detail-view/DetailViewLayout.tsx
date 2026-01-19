@@ -33,7 +33,8 @@ export const DetailViewLayout: React.FC<DetailViewLayoutProps> = ({
           </Button>
 
           <div className="flex-1 overflow-y-auto">
-            <div className="flex min-h-full">
+            {/* Desktop layout */}
+            <div className="hidden lg:flex min-h-full">
               {/* Photo Gallery Column */}
               <aside className="w-[300px] flex-shrink-0 p-6 pt-16">
                 {photoGallery}
@@ -46,6 +47,24 @@ export const DetailViewLayout: React.FC<DetailViewLayoutProps> = ({
 
               {/* Sidebar Column */}
               <aside className="w-[320px] flex-shrink-0 p-6 pt-10 border-l border-border">
+                {sidebar}
+              </aside>
+            </div>
+
+            {/* Mobile layout */}
+            <div className="lg:hidden flex flex-col px-4 py-6 pt-14 space-y-8">
+              {/* Main Content first on mobile */}
+              <main>
+                {mainContent}
+              </main>
+
+              {/* Photo Gallery second */}
+              <section>
+                {photoGallery}
+              </section>
+
+              {/* Sidebar last */}
+              <aside className="border-t border-border pt-6">
                 {sidebar}
               </aside>
             </div>
