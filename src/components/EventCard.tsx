@@ -64,7 +64,7 @@ const EventCard = ({
       <img src={image} alt={title} className="w-16 h-16 rounded object-cover flex-shrink-0" />
       
       <div className="flex-1 min-w-0">
-        <h3 className="font-medium text-sm leading-tight mb-1">{title}</h3>
+        <h3 className="font-medium leading-tight mb-1" style={{ fontSize: 'clamp(1rem, calc(0.5rem + 5vw), 6rem)' }}>{title}</h3>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
           <Avatar className="w-4 h-4">
             <AvatarImage src={organizerAvatar} />
