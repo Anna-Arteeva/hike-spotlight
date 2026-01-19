@@ -13,10 +13,12 @@
     "community": "Comunità",
     "organizeEvent": "Organizza evento"
   },
-  "events": {
+"events": {
     "title": "Eventi",
     "upcomingEvents": "Eventi in arrivo",
-    "fromMunich": "Da Monaco",
+    "fromLocation": "Da {{location}}",
+    "nearYou": "Vicino a te",
+    "shareLocation": "Condividi posizione",
     "allActivities": "Tutte le attività",
     "departingFrom": "Partenza da",
     "activity": "Attività",

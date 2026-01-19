@@ -13,10 +13,12 @@
     "community": "Community",
     "organizeEvent": "Organize event"
   },
-  "events": {
+"events": {
     "title": "Events",
     "upcomingEvents": "Upcoming events",
-    "fromMunich": "From Munich",
+    "fromLocation": "From {{location}}",
+    "nearYou": "Near you",
+    "shareLocation": "Share location",
     "allActivities": "All activities",
     "departingFrom": "Departing from",
     "activity": "Activity",
