@@ -1,51 +1,21 @@
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-const communityStats = [
-  { label: "Members", value: "3.2k" },
-  { label: "Group hikes", value: "128" },
-  { label: "Active guides", value: "42" },
-];
-
-const meetups = [
-  {
-    title: "Weekend sunrise hike",
-    description: "Easy loop with a scenic ridge at dawn.",
-    meta: "Sat, 6:30 AM · 18 spots left",
-  },
-  {
-    title: "Trail care day",
-    description: "Help restore paths with the local alpine club.",
-    meta: "Sun, 10:00 AM · Tools provided",
-  },
-  {
-    title: "Beginner navigation clinic",
-    description: "Map, compass, and route planning basics.",
-    meta: "Wed, 6:00 PM · 12 spots left",
-  },
-];
-
-const discussions = [
-  {
-    title: "Favorite huts for stormy weekends",
-    tag: "Tips",
-    summary: "Share your coziest, most reliable cabin picks.",
-  },
-  {
-    title: "Packing list for variable conditions",
-    tag: "Gear",
-    summary: "Lightweight layers that still keep you warm.",
-  },
-  {
-    title: "Best training hikes near the city",
-    tag: "Local",
-    summary: "Short loops with steady elevation gain.",
-  },
-];
-
 const Community = () => {
+  const { t } = useTranslation();
+
+  const communityStats = [
+    { labelKey: "members", value: "3.2k" },
+    { labelKey: "groupHikes", value: "128" },
+    { labelKey: "activeGuides", value: "42" },
+  ];
+
+  const meetupKeys = ["sunriseHike", "trailCare", "navigationClinic"] as const;
+  const discussionKeys = ["huts", "packing", "training"] as const;
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -53,26 +23,26 @@ const Community = () => {
       <main className="container mx-auto px-6 py-10 space-y-10">
         <section className="grid gap-6 lg:grid-cols-[2fr_1fr]">
           <div>
-            <Badge variant="secondary">Community</Badge>
-            <h1 className="mt-3 text-4xl font-bold">Hiking together, all year</h1>
+            <Badge variant="secondary">{t('community.badge')}</Badge>
+            <h1 className="mt-3 text-4xl font-bold">{t('community.title')}</h1>
             <p className="mt-3 text-muted-foreground">
-              Meet local hikers, share trail wisdom, and plan memorable weekends with people who move at your pace.
+              {t('community.description')}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Button>Join the community</Button>
-              <Button variant="outline">View guidelines</Button>
+              <Button>{t('community.joinCommunity')}</Button>
+              <Button variant="outline">{t('community.viewGuidelines')}</Button>
             </div>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>Community pulse</CardTitle>
-              <CardDescription>Weekly snapshot of what is new.</CardDescription>
+              <CardTitle>{t('community.communityPulse')}</CardTitle>
+              <CardDescription>{t('community.weeklySnapshot')}</CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
               {communityStats.map((stat) => (
-                <div key={stat.label} className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">{stat.label}</span>
+                <div key={stat.labelKey} className="flex items-center justify-between">
+                  <span className="text-sm text-muted-foreground">{t(`community.${stat.labelKey}`)}</span>
                   <span className="text-lg font-semibold">{stat.value}</span>
                 </div>
               ))}
@@ -82,9 +52,9 @@ const Community = () => {
 
         <section className="grid gap-4 sm:grid-cols-3">
           {communityStats.map((stat) => (
-            <Card key={`stat-${stat.label}`}>
+            <Card key={`stat-${stat.labelKey}`}>
               <CardHeader className="pb-2">
-                <CardDescription>{stat.label}</CardDescription>
+                <CardDescription>{t(`community.${stat.labelKey}`)}</CardDescription>
                 <CardTitle className="text-3xl">{stat.value}</CardTitle>
               </CardHeader>
             </Card>
@@ -94,19 +64,21 @@ const Community = () => {
         <section className="grid gap-6 lg:grid-cols-[2fr_1fr]">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold">Upcoming meetups</h2>
+              <h2 className="text-2xl font-semibold">{t('community.upcomingMeetups')}</h2>
               <Button variant="ghost" className="text-primary">
-                View all
+                {t('common.viewAll')}
               </Button>
             </div>
             <div className="space-y-4">
-              {meetups.map((meetup) => (
-                <Card key={meetup.title}>
+              {meetupKeys.map((key) => (
+                <Card key={key}>
                   <CardHeader className="space-y-2">
-                    <CardTitle className="text-xl">{meetup.title}</CardTitle>
-                    <CardDescription>{meetup.description}</CardDescription>
+                    <CardTitle className="text-xl">{t(`community.meetups.${key}.title`)}</CardTitle>
+                    <CardDescription>{t(`community.meetups.${key}.description`)}</CardDescription>
                   </CardHeader>
-                  <CardContent className="text-sm text-muted-foreground">{meetup.meta}</CardContent>
+                  <CardContent className="text-sm text-muted-foreground">
+                    {t(`community.meetups.${key}.meta`)}
+                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -114,20 +86,20 @@ const Community = () => {
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold">Discussion highlights</h2>
+              <h2 className="text-2xl font-semibold">{t('community.discussionHighlights')}</h2>
               <Button variant="ghost" className="text-primary">
-                Start a thread
+                {t('community.startThread')}
               </Button>
             </div>
             <div className="space-y-3">
-              {discussions.map((discussion) => (
-                <Card key={discussion.title}>
+              {discussionKeys.map((key) => (
+                <Card key={key}>
                   <CardHeader className="space-y-2">
                     <Badge variant="outline" className="w-fit">
-                      {discussion.tag}
+                      {t(`community.discussions.${key}.tag`)}
                     </Badge>
-                    <CardTitle className="text-lg">{discussion.title}</CardTitle>
-                    <CardDescription>{discussion.summary}</CardDescription>
+                    <CardTitle className="text-lg">{t(`community.discussions.${key}.title`)}</CardTitle>
+                    <CardDescription>{t(`community.discussions.${key}.summary`)}</CardDescription>
                   </CardHeader>
                 </Card>
               ))}

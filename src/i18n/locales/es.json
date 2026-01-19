@@ -1,0 +1,92 @@
+{
+  "common": {
+    "search": "Buscar",
+    "viewAll": "Ver todo",
+    "clearAllFilters": "Borrar todos los filtros",
+    "noResults": "No se encontraron resultados",
+    "tryAdjusting": "Intenta ajustar tus filtros",
+    "returnHome": "Volver al inicio"
+  },
+  "nav": {
+    "events": "Eventos",
+    "routes": "Rutas",
+    "community": "Comunidad",
+    "organizeEvent": "Organizar evento"
+  },
+  "events": {
+    "title": "Eventos",
+    "upcomingEvents": "Próximos eventos",
+    "fromMunich": "Desde Múnich",
+    "allActivities": "Todas las actividades",
+    "departingFrom": "Saliendo de",
+    "activity": "Actividad",
+    "participants": "Participantes",
+    "tomorrowSaturday": "Mañana, sábado",
+    "spotsLeft": "plazas disponibles",
+    "totalHeight": "desnivel total",
+    "descent": "descenso"
+  },
+  "routes": {
+    "title": "Rutas",
+    "noRoutesFound": "No se encontraron rutas"
+  },
+  "community": {
+    "badge": "Comunidad",
+    "title": "Senderismo juntos, todo el año",
+    "description": "Conoce a excursionistas locales, comparte consejos de senderos y planifica fines de semana memorables con personas que caminan a tu ritmo.",
+    "joinCommunity": "Únete a la comunidad",
+    "viewGuidelines": "Ver las normas",
+    "communityPulse": "Pulso de la comunidad",
+    "weeklySnapshot": "Resumen semanal de las novedades.",
+    "members": "Miembros",
+    "groupHikes": "Excursiones en grupo",
+    "activeGuides": "Guías activos",
+    "upcomingMeetups": "Próximos encuentros",
+    "discussionHighlights": "Discusiones destacadas",
+    "startThread": "Iniciar un hilo",
+    "meetups": {
+      "sunriseHike": {
+        "title": "Excursión al amanecer del fin de semana",
+        "description": "Bucle fácil con una cresta panorámica al amanecer.",
+        "meta": "Sáb, 6:30 AM · 18 plazas disponibles"
+      },
+      "trailCare": {
+        "title": "Día de cuidado del sendero",
+        "description": "Ayuda a restaurar los caminos con el club alpino local.",
+        "meta": "Dom, 10:00 AM · Herramientas incluidas"
+      },
+      "navigationClinic": {
+        "title": "Taller de navegación para principiantes",
+        "description": "Fundamentos de mapa, brújula y planificación de rutas.",
+        "meta": "Mié, 6:00 PM · 12 plazas disponibles"
+      }
+    },
+    "discussions": {
+      "huts": {
+        "title": "Refugios favoritos para fines de semana tormentosos",
+        "tag": "Consejos",
+        "summary": "Comparte tus refugios más acogedores y confiables."
+      },
+      "packing": {
+        "title": "Lista de equipaje para condiciones variables",
+        "tag": "Equipo",
+        "summary": "Capas ligeras que aún te mantienen abrigado."
+      },
+      "training": {
+        "title": "Mejores rutas de entrenamiento cerca de la ciudad",
+        "tag": "Local",
+        "summary": "Bucles cortos con ganancia de elevación constante."
+      }
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "¡Ups! Página no encontrada"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français",
+    "it": "Italiano",
+    "es": "Español"
+  }
+}

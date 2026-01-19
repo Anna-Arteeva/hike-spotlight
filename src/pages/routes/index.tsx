@@ -12,6 +12,7 @@
  */
 
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
@@ -34,6 +35,7 @@ const ITEMS_PER_PAGE = 12;
 export default function RoutesIndex() {
   const { filters, sort, page, updateFilters, setSort, setPage, clearFilters, clearFilter, activeFilterCount } = useRouteFilters();
   const [isRouteModalOpen, setIsRouteModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   const { paginatedRoutes, totalPages, totalCount } = useMemo(() => {
     const filtered = filterRoutes(routes, filters);
@@ -67,10 +69,10 @@ export default function RoutesIndex() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <Mountain className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
-            <h2 className="text-lg font-semibold text-foreground mb-2">No routes found</h2>
-            <p className="text-muted-foreground mb-4">Try adjusting your filters</p>
-            <Button variant="outline" onClick={clearFilters}>Clear all filters</Button>
+            <Mountain className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" aria-hidden="true" />
+            <h2 className="text-lg font-semibold text-foreground mb-2">{t('routes.noRoutesFound')}</h2>
+            <p className="text-muted-foreground mb-4">{t('common.tryAdjusting')}</p>
+            <Button variant="outline" onClick={clearFilters}>{t('common.clearAllFilters')}</Button>
           </div>
         )}
 
