@@ -90,5 +90,11 @@
     "fr": "Français",
     "it": "Italiano",
     "es": "Español"
+  },
+  "theme": {
+    "toggle": "Cambia tema",
+    "light": "Chiaro",
+    "dark": "Scuro",
+    "system": "Sistema"
   }
 }

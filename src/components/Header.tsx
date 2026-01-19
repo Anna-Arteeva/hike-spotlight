@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import CreateEventModal from "./CreateEventModal";
 
 export default function Header() {
@@ -75,6 +76,9 @@ export default function Header() {
                   />
                 </div>
               </div>
+
+              {/* Theme Switcher */}
+              <ThemeSwitcher />
 
               {/* Language Switcher */}
               <LanguageSwitcher />
