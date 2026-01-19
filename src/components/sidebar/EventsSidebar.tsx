@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -258,6 +259,9 @@ function EventItem({
 
 // Main Sidebar Component
 export const EventsSidebar = () => {
+  const [upcomingParent] = useAutoAnimate();
+  const [pastParent] = useAutoAnimate();
+  
   const upcomingEvents = [
     {
       date: "Jun 30",
@@ -327,7 +331,7 @@ export const EventsSidebar = () => {
         <h2 className="text-lg font-bold text-foreground">Your upcoming events</h2>
       </header>
 
-      <section className="mt-6 space-y-4">
+      <section ref={upcomingParent} className="mt-6 space-y-4">
         {upcomingEvents.map((event, index) => (
           <EventItem key={`upcoming-${index}`} {...event} />
         ))}
@@ -339,7 +343,7 @@ export const EventsSidebar = () => {
         <h2 className="text-lg font-bold text-foreground">Your past events</h2>
       </header>
 
-      <section className="mt-6">
+      <section ref={pastParent} className="mt-6">
         {pastEvents.map((event, index) => (
           <EventItem key={`past-${index}`} {...event} isPastEvent={true} />
         ))}
