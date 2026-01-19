@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Mountain, Clock, ArrowUpRight, MapPin } from 'lucide-react';
 import { DifficultyBadge } from './DifficultyChips';
@@ -10,13 +9,14 @@ import { cn } from '@/lib/utils';
 interface RouteCardProps {
   route: Route;
   className?: string;
+  onClick?: () => void;
 }
 
-export function RouteCard({ route, className }: RouteCardProps) {
+export function RouteCard({ route, className, onClick }: RouteCardProps) {
   const routeTypeLabel = ROUTE_TYPES.find(t => t.value === route.route_type)?.label ?? route.route_type;
 
   return (
-    <Link to={`/routes/${route.slug}`}>
+    <div onClick={onClick} className="cursor-pointer">
       <Card className={cn(
         'overflow-hidden transition-all hover:shadow-lg hover:border-primary/30 group',
         className
@@ -67,7 +67,7 @@ export function RouteCard({ route, className }: RouteCardProps) {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </div>
   );
 }
 

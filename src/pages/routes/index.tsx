@@ -11,7 +11,7 @@
  * 3. Consider server-side pagination for large datasets
  */
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
@@ -19,6 +19,7 @@ import { useRouteFilters } from '@/hooks/useRouteFilters';
 import { routes, filterRoutes, sortRoutes, paginateRoutes } from '@/lib/routeUtils';
 import { RoutesToolbar } from '@/components/routes/RoutesToolbar';
 import { RouteCard } from '@/components/routes/RouteCard';
+import { RouteDetails } from '@/components/detail-view';
 import {
   Pagination,
   PaginationContent,
@@ -32,6 +33,7 @@ const ITEMS_PER_PAGE = 12;
 
 export default function RoutesIndex() {
   const { filters, sort, page, updateFilters, setSort, setPage, clearFilters, clearFilter, activeFilterCount } = useRouteFilters();
+  const [isRouteModalOpen, setIsRouteModalOpen] = useState(false);
 
   const { paginatedRoutes, totalPages, totalCount } = useMemo(() => {
     const filtered = filterRoutes(routes, filters);
@@ -60,7 +62,7 @@ export default function RoutesIndex() {
         {paginatedRoutes.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {paginatedRoutes.map((route) => (
-              <RouteCard key={route.id} route={route} />
+              <RouteCard key={route.id} route={route} onClick={() => setIsRouteModalOpen(true)} />
             ))}
           </div>
         ) : (
@@ -97,6 +99,8 @@ export default function RoutesIndex() {
           </Pagination>
         )}
       </main>
+
+      <RouteDetails open={isRouteModalOpen} onOpenChange={setIsRouteModalOpen} />
     </div>
   );
 }
