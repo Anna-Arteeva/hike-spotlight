@@ -41,7 +41,7 @@ export const DetailViewLayout: React.FC<DetailViewLayoutProps> = ({
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-4 right-4 z-50 h-auto p-2 hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="absolute top-4 right-4 z-50 h-auto p-2 bg-background/80 hover:bg-foreground hover:text-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition-colors"
             onClick={() => onOpenChange(false)}
             aria-label="Close dialog"
           >
