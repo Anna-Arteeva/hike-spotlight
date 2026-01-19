@@ -19,8 +19,15 @@ export default function Header() {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <Link to="/" className="flex items-center gap-2 group">
+              <svg 
+                width="40" 
+                height="40" 
+                viewBox="0 0 40 40" 
+                fill="none" 
+                aria-hidden="true"
+                className="group-hover:animate-bounce-subtle"
+              >
                 <path d="M8 32L20 8L32 32H8Z" fill="#2D9F5C" />
                 <circle cx="20" cy="18" r="3" fill="#FFD700" />
               </svg>
