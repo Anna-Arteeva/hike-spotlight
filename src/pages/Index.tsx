@@ -5,7 +5,8 @@ import EventCard from "@/components/EventCard";
 import { EventsSidebar } from "@/components/sidebar/EventsSidebar";
 import { EventDetails } from "@/components/detail-view";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, MapPin, Loader2 } from "lucide-react";
+import { useGeolocation } from "@/hooks/useGeolocation";
 import event1 from "@/assets/event1.jpg";
 import event2 from "@/assets/event2.jpg";
 import event3 from "@/assets/event3.jpg";
@@ -16,6 +17,7 @@ import event6 from "@/assets/event6.jpg";
 const Index = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const { t } = useTranslation();
+  const { city, loading, requestLocation, requested } = useGeolocation();
 
   return (
     <div className="min-h-screen bg-background">
@@ -36,10 +38,21 @@ const Index = () => {
                   {t('events.upcomingEvents')}
                 </TabsTrigger>
                 <TabsTrigger 
-                  value="munich"
-                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2"
+                  value="location"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2 flex items-center gap-1"
+                  onClick={!city && !loading ? requestLocation : undefined}
                 >
-                  {t('events.fromMunich')}
+                  {loading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <MapPin className="h-4 w-4" aria-hidden="true" />
+                  )}
+                  {city 
+                    ? t('events.fromLocation', { location: city })
+                    : requested && !city 
+                      ? t('events.nearYou')
+                      : t('events.shareLocation')
+                  }
                 </TabsTrigger>
                 <TabsTrigger 
                   value="all"
@@ -51,7 +64,7 @@ const Index = () => {
               </TabsList>
               {/* Hidden TabsContent elements to satisfy ARIA requirements */}
               <TabsContent value="upcoming" className="sr-only" />
-              <TabsContent value="munich" className="sr-only" />
+              <TabsContent value="location" className="sr-only" />
               <TabsContent value="all" className="sr-only" />
             </Tabs>
 
