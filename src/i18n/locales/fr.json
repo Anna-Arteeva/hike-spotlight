@@ -1,0 +1,92 @@
+{
+  "common": {
+    "search": "Rechercher",
+    "viewAll": "Voir tout",
+    "clearAllFilters": "Effacer tous les filtres",
+    "noResults": "Aucun résultat trouvé",
+    "tryAdjusting": "Essayez d'ajuster vos filtres",
+    "returnHome": "Retour à l'accueil"
+  },
+  "nav": {
+    "events": "Événements",
+    "routes": "Itinéraires",
+    "community": "Communauté",
+    "organizeEvent": "Organiser un événement"
+  },
+  "events": {
+    "title": "Événements",
+    "upcomingEvents": "Événements à venir",
+    "fromMunich": "Depuis Munich",
+    "allActivities": "Toutes les activités",
+    "departingFrom": "Départ de",
+    "activity": "Activité",
+    "participants": "Participants",
+    "tomorrowSaturday": "Demain, samedi",
+    "spotsLeft": "places restantes",
+    "totalHeight": "dénivelé total",
+    "descent": "descente"
+  },
+  "routes": {
+    "title": "Itinéraires",
+    "noRoutesFound": "Aucun itinéraire trouvé"
+  },
+  "community": {
+    "badge": "Communauté",
+    "title": "Randonner ensemble, toute l'année",
+    "description": "Rencontrez des randonneurs locaux, partagez vos conseils de sentiers et planifiez des week-ends mémorables avec des personnes qui avancent à votre rythme.",
+    "joinCommunity": "Rejoindre la communauté",
+    "viewGuidelines": "Voir les règles",
+    "communityPulse": "Pouls de la communauté",
+    "weeklySnapshot": "Aperçu hebdomadaire des nouveautés.",
+    "members": "Membres",
+    "groupHikes": "Randonnées en groupe",
+    "activeGuides": "Guides actifs",
+    "upcomingMeetups": "Prochaines rencontres",
+    "discussionHighlights": "Discussions en vedette",
+    "startThread": "Démarrer un fil",
+    "meetups": {
+      "sunriseHike": {
+        "title": "Randonnée au lever du soleil",
+        "description": "Boucle facile avec une crête panoramique à l'aube.",
+        "meta": "Sam, 6h30 · 18 places restantes"
+      },
+      "trailCare": {
+        "title": "Journée d'entretien des sentiers",
+        "description": "Aidez à restaurer les chemins avec le club alpin local.",
+        "meta": "Dim, 10h00 · Outils fournis"
+      },
+      "navigationClinic": {
+        "title": "Atelier d'orientation pour débutants",
+        "description": "Bases de la carte, boussole et planification d'itinéraire.",
+        "meta": "Mer, 18h00 · 12 places restantes"
+      }
+    },
+    "discussions": {
+      "huts": {
+        "title": "Refuges préférés pour les week-ends orageux",
+        "tag": "Conseils",
+        "summary": "Partagez vos choix de cabanes les plus confortables."
+      },
+      "packing": {
+        "title": "Liste de colisage pour conditions variables",
+        "tag": "Équipement",
+        "summary": "Couches légères qui vous gardent au chaud."
+      },
+      "training": {
+        "title": "Meilleures randonnées d'entraînement près de la ville",
+        "tag": "Local",
+        "summary": "Boucles courtes avec un dénivelé régulier."
+      }
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Oups ! Page non trouvée"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français",
+    "it": "Italiano",
+    "es": "Español"
+  }
+}

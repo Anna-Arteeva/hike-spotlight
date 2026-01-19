@@ -1,0 +1,92 @@
+{
+  "common": {
+    "search": "Cerca",
+    "viewAll": "Vedi tutto",
+    "clearAllFilters": "Cancella tutti i filtri",
+    "noResults": "Nessun risultato trovato",
+    "tryAdjusting": "Prova a modificare i filtri",
+    "returnHome": "Torna alla Home"
+  },
+  "nav": {
+    "events": "Eventi",
+    "routes": "Percorsi",
+    "community": "Comunità",
+    "organizeEvent": "Organizza evento"
+  },
+  "events": {
+    "title": "Eventi",
+    "upcomingEvents": "Eventi in arrivo",
+    "fromMunich": "Da Monaco",
+    "allActivities": "Tutte le attività",
+    "departingFrom": "Partenza da",
+    "activity": "Attività",
+    "participants": "Partecipanti",
+    "tomorrowSaturday": "Domani, sabato",
+    "spotsLeft": "posti disponibili",
+    "totalHeight": "dislivello totale",
+    "descent": "discesa"
+  },
+  "routes": {
+    "title": "Percorsi",
+    "noRoutesFound": "Nessun percorso trovato"
+  },
+  "community": {
+    "badge": "Comunità",
+    "title": "Escursioni insieme, tutto l'anno",
+    "description": "Incontra escursionisti locali, condividi consigli sui sentieri e pianifica weekend memorabili con persone che camminano al tuo ritmo.",
+    "joinCommunity": "Unisciti alla comunità",
+    "viewGuidelines": "Vedi le linee guida",
+    "communityPulse": "Polso della comunità",
+    "weeklySnapshot": "Panoramica settimanale delle novità.",
+    "members": "Membri",
+    "groupHikes": "Escursioni di gruppo",
+    "activeGuides": "Guide attive",
+    "upcomingMeetups": "Prossimi incontri",
+    "discussionHighlights": "Discussioni in evidenza",
+    "startThread": "Inizia una discussione",
+    "meetups": {
+      "sunriseHike": {
+        "title": "Escursione all'alba del weekend",
+        "description": "Anello facile con cresta panoramica all'alba.",
+        "meta": "Sab, 6:30 · 18 posti rimasti"
+      },
+      "trailCare": {
+        "title": "Giornata di manutenzione sentieri",
+        "description": "Aiuta a ripristinare i sentieri con il club alpino locale.",
+        "meta": "Dom, 10:00 · Attrezzi forniti"
+      },
+      "navigationClinic": {
+        "title": "Corso di orientamento per principianti",
+        "description": "Basi di mappa, bussola e pianificazione percorso.",
+        "meta": "Mer, 18:00 · 12 posti rimasti"
+      }
+    },
+    "discussions": {
+      "huts": {
+        "title": "Rifugi preferiti per weekend tempestosi",
+        "tag": "Consigli",
+        "summary": "Condividi le tue scelte di rifugi più accoglienti."
+      },
+      "packing": {
+        "title": "Lista per condizioni variabili",
+        "tag": "Attrezzatura",
+        "summary": "Strati leggeri che ti tengono al caldo."
+      },
+      "training": {
+        "title": "Migliori escursioni di allenamento vicino alla città",
+        "tag": "Locale",
+        "summary": "Anelli brevi con dislivello costante."
+      }
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Ops! Pagina non trovata"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français",
+    "it": "Italiano",
+    "es": "Español"
+  }
+}

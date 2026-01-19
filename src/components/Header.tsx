@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import CreateEventModal from "./CreateEventModal";
 
 export default function Header() {
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -16,7 +19,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
                 <path d="M8 32L20 8L32 32H8Z" fill="#2D9F5C" />
                 <circle cx="20" cy="18" r="3" fill="#FFD700" />
               </svg>
@@ -26,43 +29,44 @@ export default function Header() {
             {/* Search and Profile */}
             <div className="flex items-center gap-6">
               {/* Navigation */}
-              <nav className="hidden md:flex items-center gap-6">
+              <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
                 <Link
                   to="/"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Events
+                  {t('nav.events')}
                 </Link>
                 <Link
                   to="/routes"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Routes
+                  {t('nav.routes')}
                 </Link>
                 <Link
                   to="/community"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Community
+                  {t('nav.community')}
                 </Link>
                 <button
                   onClick={() => setIsCreateEventModalOpen(true)}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
-                  Organize event
+                  {t('nav.organizeEvent')}
                 </button>
               </nav>
 
               {/* Search */}
               <div className="flex items-center gap-2">
                 <span className="text-sm text-muted-foreground hidden sm:inline">
-                  Search
+                  {t('common.search')}
                 </span>
                 <div className="relative">
-                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                   <Input
                     type="text"
                     placeholder=""
+                    aria-label={t('common.search')}
                     className={`pl-8 transition-all duration-200 ${
                       isSearchActive ? "w-48" : "w-32"
                     }`}
@@ -72,9 +76,12 @@ export default function Header() {
                 </div>
               </div>
 
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
               {/* Avatar */}
               <Avatar className="h-9 w-9">
-                <AvatarImage src="" alt="User" />
+                <AvatarImage src="" alt="User avatar" />
                 <AvatarFallback>A</AvatarFallback>
               </Avatar>
             </div>

@@ -1,0 +1,92 @@
+{
+  "common": {
+    "search": "Search",
+    "viewAll": "View all",
+    "clearAllFilters": "Clear all filters",
+    "noResults": "No results found",
+    "tryAdjusting": "Try adjusting your filters",
+    "returnHome": "Return to Home"
+  },
+  "nav": {
+    "events": "Events",
+    "routes": "Routes",
+    "community": "Community",
+    "organizeEvent": "Organize event"
+  },
+  "events": {
+    "title": "Events",
+    "upcomingEvents": "Upcoming events",
+    "fromMunich": "From Munich",
+    "allActivities": "All activities",
+    "departingFrom": "Departing from",
+    "activity": "Activity",
+    "participants": "Participants",
+    "tomorrowSaturday": "Tomorrow, Saturday",
+    "spotsLeft": "spots left",
+    "totalHeight": "total height",
+    "descent": "descent"
+  },
+  "routes": {
+    "title": "Routes",
+    "noRoutesFound": "No routes found"
+  },
+  "community": {
+    "badge": "Community",
+    "title": "Hiking together, all year",
+    "description": "Meet local hikers, share trail wisdom, and plan memorable weekends with people who move at your pace.",
+    "joinCommunity": "Join the community",
+    "viewGuidelines": "View guidelines",
+    "communityPulse": "Community pulse",
+    "weeklySnapshot": "Weekly snapshot of what is new.",
+    "members": "Members",
+    "groupHikes": "Group hikes",
+    "activeGuides": "Active guides",
+    "upcomingMeetups": "Upcoming meetups",
+    "discussionHighlights": "Discussion highlights",
+    "startThread": "Start a thread",
+    "meetups": {
+      "sunriseHike": {
+        "title": "Weekend sunrise hike",
+        "description": "Easy loop with a scenic ridge at dawn.",
+        "meta": "Sat, 6:30 AM · 18 spots left"
+      },
+      "trailCare": {
+        "title": "Trail care day",
+        "description": "Help restore paths with the local alpine club.",
+        "meta": "Sun, 10:00 AM · Tools provided"
+      },
+      "navigationClinic": {
+        "title": "Beginner navigation clinic",
+        "description": "Map, compass, and route planning basics.",
+        "meta": "Wed, 6:00 PM · 12 spots left"
+      }
+    },
+    "discussions": {
+      "huts": {
+        "title": "Favorite huts for stormy weekends",
+        "tag": "Tips",
+        "summary": "Share your coziest, most reliable cabin picks."
+      },
+      "packing": {
+        "title": "Packing list for variable conditions",
+        "tag": "Gear",
+        "summary": "Lightweight layers that still keep you warm."
+      },
+      "training": {
+        "title": "Best training hikes near the city",
+        "tag": "Local",
+        "summary": "Short loops with steady elevation gain."
+      }
+    }
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Oops! Page not found"
+  },
+  "language": {
+    "en": "English",
+    "fr": "Français",
+    "it": "Italiano",
+    "es": "Español"
+  }
+}

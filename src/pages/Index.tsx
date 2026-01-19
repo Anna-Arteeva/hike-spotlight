@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
 import { EventsSidebar } from "@/components/sidebar/EventsSidebar";
@@ -14,6 +15,8 @@ import event6 from "@/assets/event6.jpg";
 
 const Index = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -21,28 +24,28 @@ const Index = () => {
       <div className="container mx-auto px-6 py-8">
         <div className="flex gap-8">
           {/* Main Content */}
-          <div className="flex-1">
-            <h1 className="text-4xl font-bold mb-6">Events</h1>
+          <main className="flex-1">
+            <h1 className="text-4xl font-bold mb-6">{t('events.title')}</h1>
             
             <Tabs defaultValue="upcoming" className="mb-6">
-              <TabsList className="bg-transparent border-b border-border rounded-none w-full justify-start p-0 h-auto" aria-label="Event filters">
+              <TabsList className="bg-transparent border-b border-border rounded-none w-full justify-start p-0 h-auto" aria-label={t('events.title')}>
                 <TabsTrigger 
                   value="upcoming" 
                   className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2"
                 >
-                  Upcoming events
+                  {t('events.upcomingEvents')}
                 </TabsTrigger>
                 <TabsTrigger 
                   value="munich"
                   className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2"
                 >
-                  From Munich
+                  {t('events.fromMunich')}
                 </TabsTrigger>
                 <TabsTrigger 
                   value="all"
                   className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2 flex items-center gap-1"
                 >
-                  All activities
+                  {t('events.allActivities')}
                   <ChevronDown className="h-4 w-4" aria-hidden="true" />
                 </TabsTrigger>
               </TabsList>
@@ -53,13 +56,13 @@ const Index = () => {
             </Tabs>
 
             {/* Events List */}
-            <div className="mb-8">
+            <section className="mb-8" aria-labelledby="tomorrow-heading">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold">Tomorrow, Saturday</h2>
+                <h2 id="tomorrow-heading" className="text-lg font-semibold">{t('events.tomorrowSaturday')}</h2>
                 <div className="flex gap-20 text-xs text-muted-foreground">
-                  <span>Departing from</span>
-                  <span>Activity</span>
-                  <span>Participants</span>
+                  <span>{t('events.departingFrom')}</span>
+                  <span>{t('events.activity')}</span>
+                  <span>{t('events.participants')}</span>
                 </div>
               </div>
               
@@ -146,11 +149,11 @@ const Index = () => {
                 participantAvatars={["", "", "", "", ""]}
                 onClick={() => setIsEventModalOpen(true)}
               />
-            </div>
+            </section>
             
             {/* Jun 23, Sunday */}
-            <div>
-              <h2 className="text-lg font-semibold mb-4">Jun 23, Sunday</h2>
+            <section aria-labelledby="jun23-heading">
+              <h2 id="jun23-heading" className="text-lg font-semibold mb-4">Jun 23, Sunday</h2>
               
               <EventCard
                 time="6:45"
@@ -193,13 +196,13 @@ const Index = () => {
                 participantAvatars={["", "", "", "", ""]}
                 onClick={() => setIsEventModalOpen(true)}
               />
-            </div>
-          </div>
+            </section>
+          </main>
 
           {/* Sidebar */}
-          <div className="w-auto flex-shrink-0">
+          <aside className="w-auto flex-shrink-0">
             <EventsSidebar />
-          </div>
+          </aside>
         </div>
       </div>
 
