@@ -4,7 +4,6 @@ import DetailViewLayout from "./DetailViewLayout";
 import PhotoGallery from "./PhotoGallery";
 import OrganizerSection from "./OrganizerSection";
 import PastEventsSection from "./PastEventsSection";
-import DiscussionSection from "./DiscussionSection";
 import RouteStats from "./RouteStats";
 
 interface RouteDetailsProps {
@@ -13,21 +12,6 @@ interface RouteDetailsProps {
 }
 
 // Sample data
-const sampleComments = [
-  {
-    id: "1",
-    author: "Victor",
-    message: "This route was amazing! The views from the top were breathtaking. Highly recommend doing it in spring.",
-    timestamp: "2d ago",
-  },
-  {
-    id: "2",
-    author: "Anna",
-    message: "Great trail for intermediate hikers. Make sure to bring enough water, there are no refill points along the way.",
-    timestamp: "3d ago",
-  },
-];
-
 const pastEvents = [
   {
     id: "1",
@@ -164,10 +148,6 @@ export const RouteDetails: React.FC<RouteDetailsProps> = ({
       <Separator />
 
       <PastEventsSection events={pastEvents} totalEvents={8} />
-
-      <Separator />
-
-      <DiscussionSection comments={sampleComments} totalComments={12} />
     </div>
   );
 
