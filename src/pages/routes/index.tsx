@@ -13,6 +13,7 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
@@ -36,6 +37,7 @@ export default function RoutesIndex() {
   const { filters, sort, page, updateFilters, setSort, setPage, clearFilters, clearFilter, activeFilterCount } = useRouteFilters();
   const [isRouteModalOpen, setIsRouteModalOpen] = useState(false);
   const { t } = useTranslation();
+  const [routesParent] = useAutoAnimate();
 
   const { paginatedRoutes, totalPages, totalCount } = useMemo(() => {
     const filtered = filterRoutes(routes, filters);
@@ -62,7 +64,7 @@ export default function RoutesIndex() {
 
         {/* Results grid */}
         {paginatedRoutes.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div ref={routesParent} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {paginatedRoutes.map((route) => (
               <RouteCard key={route.id} route={route} onClick={() => setIsRouteModalOpen(true)} />
             ))}

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -6,6 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 const Community = () => {
   const { t } = useTranslation();
+  const [meetupsParent] = useAutoAnimate();
+  const [discussionsParent] = useAutoAnimate();
 
   const communityStats = [
     { labelKey: "members", value: "3.2k" },
@@ -69,7 +72,7 @@ const Community = () => {
                 {t('common.viewAll')}
               </Button>
             </div>
-            <div className="space-y-4">
+            <div ref={meetupsParent} className="space-y-4">
               {meetupKeys.map((key) => (
                 <Card key={key}>
                   <CardHeader className="space-y-2">
@@ -91,7 +94,7 @@ const Community = () => {
                 {t('community.startThread')}
               </Button>
             </div>
-            <div className="space-y-3">
+            <div ref={discussionsParent} className="space-y-3">
               {discussionKeys.map((key) => (
                 <Card key={key}>
                   <CardHeader className="space-y-2">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
 import { EventsSidebar } from "@/components/sidebar/EventsSidebar";
@@ -18,6 +19,7 @@ const Index = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const { t } = useTranslation();
   const { city, loading, requestLocation, requested } = useGeolocation();
+  const [eventsParent] = useAutoAnimate();
 
   return (
     <div className="min-h-screen bg-background">
@@ -69,7 +71,7 @@ const Index = () => {
             </Tabs>
 
             {/* Events List */}
-            <section className="mb-8" aria-labelledby="tomorrow-heading">
+            <section ref={eventsParent} className="mb-8" aria-labelledby="tomorrow-heading">
               <div className="flex items-center justify-between mb-4">
                 <h2 id="tomorrow-heading" className="text-lg font-semibold">{t('events.tomorrowSaturday')}</h2>
                 <div className="flex gap-20 text-xs text-muted-foreground">
