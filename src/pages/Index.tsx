@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import EventCard from "@/components/EventCard";
 import { EventsSidebar } from "@/components/sidebar/EventsSidebar";
 import { EventDetails } from "@/components/detail-view";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChevronDown } from "lucide-react";
 import event1 from "@/assets/event1.jpg";
 import event2 from "@/assets/event2.jpg";
@@ -25,7 +25,7 @@ const Index = () => {
             <h1 className="text-4xl font-bold mb-6">Events</h1>
             
             <Tabs defaultValue="upcoming" className="mb-6">
-              <TabsList className="bg-transparent border-b border-border rounded-none w-full justify-start p-0 h-auto">
+              <TabsList className="bg-transparent border-b border-border rounded-none w-full justify-start p-0 h-auto" aria-label="Event filters">
                 <TabsTrigger 
                   value="upcoming" 
                   className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2"
@@ -43,9 +43,13 @@ const Index = () => {
                   className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent px-4 pb-2 flex items-center gap-1"
                 >
                   All activities
-                  <ChevronDown className="h-4 w-4" />
+                  <ChevronDown className="h-4 w-4" aria-hidden="true" />
                 </TabsTrigger>
               </TabsList>
+              {/* Hidden TabsContent elements to satisfy ARIA requirements */}
+              <TabsContent value="upcoming" className="sr-only" />
+              <TabsContent value="munich" className="sr-only" />
+              <TabsContent value="all" className="sr-only" />
             </Tabs>
 
             {/* Events List */}
