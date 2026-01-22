@@ -55,6 +55,11 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
     }
   }, [open]);
 
+  const hasUnsavedChanges = useCallback((): boolean => {
+    // Only consider it unsaved if user has selected an activity (started the flow)
+    return !!formData.activityType;
+  }, [formData.activityType]);
+
   // Save to localStorage whenever formData changes
   useEffect(() => {
     if (hasUnsavedChanges()) {
@@ -63,12 +68,7 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
         date: formData.date?.toISOString() ?? null,
       }));
     }
-  }, [formData]);
-
-  const hasUnsavedChanges = useCallback((): boolean => {
-    // Only consider it unsaved if user has selected an activity (started the flow)
-    return !!formData.activityType;
-  }, [formData]);
+  }, [formData, hasUnsavedChanges]);
 
   const handleClose = () => {
     if (hasUnsavedChanges()) {
