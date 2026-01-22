@@ -87,6 +87,13 @@
     "back": "Indietro",
     "continue": "Continua",
     "finish": "Crea evento",
+    "creating": "Creazione...",
+    "success": "Evento creato con successo!",
+    "errors": {
+      "missingFields": "Per favore compila tutti i campi richiesti",
+      "notAuthenticated": "Accedi per creare un evento",
+      "createFailed": "Impossibile creare l'evento. Riprova."
+    },
     "step1": {
       "title": "Che tipo di avventura?",
       "subtitle": "Scegli un'attività per iniziare"

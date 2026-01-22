@@ -37,6 +37,7 @@ export type Database = {
           transport: Database["public"]["Enums"]["transport_type"]
           transport_subtext: string | null
           updated_at: string
+          user_id: string | null
         }
         Insert: {
           activity?: Database["public"]["Enums"]["activity_type"]
@@ -60,6 +61,7 @@ export type Database = {
           transport?: Database["public"]["Enums"]["transport_type"]
           transport_subtext?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Update: {
           activity?: Database["public"]["Enums"]["activity_type"]
@@ -83,6 +85,7 @@ export type Database = {
           transport?: Database["public"]["Enums"]["transport_type"]
           transport_subtext?: string | null
           updated_at?: string
+          user_id?: string | null
         }
         Relationships: []
       }
