@@ -103,6 +103,27 @@
       "timeLabel": "Heure de départ",
       "motivation": "Les départs matinaux signifient des sentiers plus frais et de meilleures vues ! ☀️"
     },
+    "step4": {
+      "title": "Détails de l'événement",
+      "subtitle": "Donnez un nom à votre événement et définissez la taille du groupe",
+      "eventName": "Nom de l'événement",
+      "eventNamePlaceholder": "Donnez un nom accrocheur à votre événement",
+      "maxParticipants": "Nombre de participants"
+    },
+    "step5": {
+      "title": "Décrivez votre événement",
+      "subtitle": "Aidez les participants à savoir à quoi s'attendre",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Tapez votre description ici",
+      "clearDescription": "Effacer la description",
+      "addDisclaimer": "Ajouter une clause de non-responsabilité",
+      "disclaimerTitle": "Clause de non-responsabilité",
+      "disclaimerText": "La randonnée peut être dangereuse. Je ne suis pas guide de montagne. Chacun est responsable de lui-même. Familiarisez-vous avec l'itinéraire et ses exigences. Il est recommandé de télécharger une carte et d'apporter un téléphone portable et une trousse de premiers secours en cas d'urgence.",
+      "coverPhoto": "Photo de couverture",
+      "uploadNewPhoto": "Télécharger une nouvelle photo",
+      "coverPhotoAlt": "Photo de couverture de l'événement",
+      "noPhotoPlaceholder": "Aucune photo sélectionnée"
+    },
     "activities": {
       "hiking": "Randonnée",
       "cycling": "Vélo",

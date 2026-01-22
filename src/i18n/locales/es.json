@@ -103,6 +103,27 @@
       "timeLabel": "Hora de salida",
       "motivation": "¡Salir temprano significa senderos más frescos y mejores vistas! ☀️"
     },
+    "step4": {
+      "title": "Detalles del evento",
+      "subtitle": "Dale un nombre a tu evento y establece el tamaño del grupo",
+      "eventName": "Nombre del evento",
+      "eventNamePlaceholder": "Dale un nombre atractivo a tu evento",
+      "maxParticipants": "Número de participantes"
+    },
+    "step5": {
+      "title": "Describe tu evento",
+      "subtitle": "Ayuda a los participantes a saber qué esperar",
+      "descriptionLabel": "Descripción",
+      "descriptionPlaceholder": "Escribe tu descripción aquí",
+      "clearDescription": "Borrar descripción",
+      "addDisclaimer": "Agregar descargo de responsabilidad",
+      "disclaimerTitle": "Descargo de responsabilidad",
+      "disclaimerText": "El senderismo puede ser peligroso. No soy guía de montaña. Cada uno es responsable de sí mismo. Familiarízate con la ruta y sus requisitos. Se recomienda descargar un mapa y llevar un teléfono móvil y un botiquín de primeros auxilios para emergencias.",
+      "coverPhoto": "Foto de portada",
+      "uploadNewPhoto": "Subir nueva foto",
+      "coverPhotoAlt": "Foto de portada del evento",
+      "noPhotoPlaceholder": "No hay foto seleccionada"
+    },
     "activities": {
       "hiking": "Senderismo",
       "cycling": "Ciclismo",

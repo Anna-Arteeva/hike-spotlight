@@ -103,6 +103,27 @@
       "timeLabel": "Start time",
       "motivation": "Early starts mean cooler trails and better views! ☀️"
     },
+    "step4": {
+      "title": "Event details",
+      "subtitle": "Give your event a name and set the group size",
+      "eventName": "Event name",
+      "eventNamePlaceholder": "Give your event a catchy name",
+      "maxParticipants": "Number of participants"
+    },
+    "step5": {
+      "title": "Describe your event",
+      "subtitle": "Help participants know what to expect",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Type your description here",
+      "clearDescription": "Clear description",
+      "addDisclaimer": "Add disclaimer",
+      "disclaimerTitle": "Disclaimer",
+      "disclaimerText": "Hiking can be dangerous. I am not a mountain guide. Everybody is responsible for her/himself. Make yourself familiar with the route and its requirements. It's recommended to download a map and bring a cell phone and first aid kit for emergencies.",
+      "coverPhoto": "Cover photo",
+      "uploadNewPhoto": "Upload new photo",
+      "coverPhotoAlt": "Event cover photo",
+      "noPhotoPlaceholder": "No photo selected"
+    },
     "activities": {
       "hiking": "Hiking",
       "cycling": "Cycling",
