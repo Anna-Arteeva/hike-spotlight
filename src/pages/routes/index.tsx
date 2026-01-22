@@ -13,20 +13,20 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Mountain, LayoutGrid, Layers } from 'lucide-react';
+import { Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import { useRouteFilters } from '@/hooks/useRouteFilters';
 import { routes, filterRoutes, sortRoutes } from '@/lib/routeUtils';
 import { RoutesToolbar } from '@/components/routes/RoutesToolbar';
-import { SwipeableRouteStack } from '@/components/routes/SwipeableRouteStack';
+import { RouteCard } from '@/components/routes/RouteCard';
 import { RouteDetails } from '@/components/detail-view';
-import { toast } from 'sonner';
 import type { Route } from '@/types/route';
 
 export default function RoutesIndex() {
   const { filters, sort, updateFilters, setSort, clearFilters, clearFilter, activeFilterCount } = useRouteFilters();
   const [isRouteModalOpen, setIsRouteModalOpen] = useState(false);
+  const [selectedRoute, setSelectedRoute] = useState<Route | null>(null);
   const { t } = useTranslation();
 
   const filteredRoutes = useMemo(() => {
@@ -34,19 +34,8 @@ export default function RoutesIndex() {
     return sortRoutes(filtered, sort);
   }, [filters, sort]);
 
-  const handleSwipeLeft = (route: Route) => {
-    toast(`Skipped: ${route.title}`, {
-      description: "Swipe right to save routes you like",
-    });
-  };
-
-  const handleSwipeRight = (route: Route) => {
-    toast.success(`Saved: ${route.title}`, {
-      description: "Added to your favorites",
-    });
-  };
-
-  const handleCardClick = () => {
+  const handleCardClick = (route: Route) => {
+    setSelectedRoute(route);
     setIsRouteModalOpen(true);
   };
 
@@ -66,15 +55,18 @@ export default function RoutesIndex() {
           onClearFilter={clearFilter}
         />
 
-        {/* Swipeable Card Stack */}
-        <div className="py-8 pb-24">
+        {/* Routes Grid */}
+        <div className="py-8">
           {filteredRoutes.length > 0 ? (
-            <SwipeableRouteStack
-              routes={filteredRoutes}
-              onSwipeLeft={handleSwipeLeft}
-              onSwipeRight={handleSwipeRight}
-              onCardClick={handleCardClick}
-            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredRoutes.map((route) => (
+                <RouteCard
+                  key={route.id}
+                  route={route}
+                  onClick={() => handleCardClick(route)}
+                />
+              ))}
+            </div>
           ) : (
             <div className="text-center py-16">
               <Mountain className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" aria-hidden="true" />
