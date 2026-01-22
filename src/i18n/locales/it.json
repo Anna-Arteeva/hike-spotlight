@@ -129,7 +129,13 @@
       "coverPhoto": "Foto di copertina",
       "uploadNewPhoto": "Carica nuova foto",
       "coverPhotoAlt": "Foto di copertina dell'evento",
-      "noPhotoPlaceholder": "Nessuna foto selezionata"
+      "noPhotoPlaceholder": "Clicca per caricare una foto",
+      "uploading": "Caricamento...",
+      "uploadSuccess": "Foto caricata con successo!",
+      "uploadFailed": "Caricamento fallito. Riprova.",
+      "invalidFileType": "Seleziona un file immagine",
+      "fileTooLarge": "Il file è troppo grande. Dimensione massima: 5 MB.",
+      "removePhoto": "Rimuovi foto"
     },
     "activities": {
       "hiking": "Escursionismo",

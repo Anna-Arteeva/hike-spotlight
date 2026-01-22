@@ -129,7 +129,13 @@
       "coverPhoto": "Foto de portada",
       "uploadNewPhoto": "Subir nueva foto",
       "coverPhotoAlt": "Foto de portada del evento",
-      "noPhotoPlaceholder": "No hay foto seleccionada"
+      "noPhotoPlaceholder": "Haz clic para subir una foto",
+      "uploading": "Subiendo...",
+      "uploadSuccess": "¡Foto subida con éxito!",
+      "uploadFailed": "Error al subir la foto. Inténtalo de nuevo.",
+      "invalidFileType": "Por favor selecciona un archivo de imagen",
+      "fileTooLarge": "El archivo es demasiado grande. Tamaño máximo: 5 MB.",
+      "removePhoto": "Eliminar foto"
     },
     "activities": {
       "hiking": "Senderismo",

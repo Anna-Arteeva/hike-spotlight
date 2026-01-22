@@ -1,9 +1,12 @@
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { X, ImageIcon } from "lucide-react";
+import { X, ImageIcon, Loader2, Trash2 } from "lucide-react";
+import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
 
 interface EventDescriptionStepProps {
   description: string;
@@ -23,15 +26,95 @@ export function EventDescriptionStep({
   onCoverPhotoChange,
 }: EventDescriptionStepProps) {
   const { t } = useTranslation();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleClearDescription = () => {
     onDescriptionChange("");
   };
 
-  const handleFileUpload = () => {
-    // For now, just a placeholder - file upload can be implemented later
-    // This would typically open a file picker and upload to storage
-    console.log("File upload clicked");
+  const handleFileInputClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      toast.error(t("createEvent.step5.invalidFileType"));
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast.error(t("createEvent.step5.fileTooLarge"));
+      return;
+    }
+
+    setIsUploading(true);
+
+    try {
+      // Generate unique filename
+      const fileExt = file.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const filePath = `covers/${fileName}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from("event-photos")
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false,
+        });
+
+      if (uploadError) {
+        console.error("Upload error:", uploadError);
+        toast.error(t("createEvent.step5.uploadFailed"));
+        return;
+      }
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from("event-photos")
+        .getPublicUrl(filePath);
+
+      onCoverPhotoChange(publicUrl);
+      toast.success(t("createEvent.step5.uploadSuccess"));
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast.error(t("createEvent.step5.uploadFailed"));
+    } finally {
+      setIsUploading(false);
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
+  const handleRemovePhoto = async () => {
+    if (!coverPhotoUrl) return;
+
+    try {
+      // Extract file path from URL
+      const url = new URL(coverPhotoUrl);
+      const pathParts = url.pathname.split("/event-photos/");
+      if (pathParts.length > 1) {
+        const filePath = pathParts[1];
+        
+        // Delete from storage
+        await supabase.storage
+          .from("event-photos")
+          .remove([filePath]);
+      }
+    } catch (error) {
+      console.error("Error removing photo:", error);
+    }
+
+    onCoverPhotoChange(null);
   };
 
   return (
@@ -114,29 +197,76 @@ export function EventDescriptionStep({
               variant="ghost"
               size="sm"
               className="text-primary hover:text-primary/80 gap-2"
-              onClick={handleFileUpload}
+              onClick={handleFileInputClick}
+              disabled={isUploading}
             >
-              <ImageIcon className="h-4 w-4" />
-              {t("createEvent.step5.uploadNewPhoto")}
+              {isUploading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  {t("createEvent.step5.uploading")}
+                </>
+              ) : (
+                <>
+                  <ImageIcon className="h-4 w-4" />
+                  {t("createEvent.step5.uploadNewPhoto")}
+                </>
+              )}
             </Button>
           </div>
 
+          {/* Hidden file input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+            aria-label={t("createEvent.step5.uploadNewPhoto")}
+          />
+
           {/* Photo Preview */}
           {coverPhotoUrl ? (
-            <div className="relative aspect-video rounded-lg overflow-hidden border border-border">
+            <div className="relative aspect-video rounded-lg overflow-hidden border border-border group">
               <img
                 src={coverPhotoUrl}
                 alt={t("createEvent.step5.coverPhotoAlt")}
                 className="w-full h-full object-cover"
               />
-            </div>
-          ) : (
-            <div className="aspect-video rounded-lg border-2 border-dashed border-border bg-muted/30 flex items-center justify-center">
-              <div className="text-center text-muted-foreground">
-                <ImageIcon className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p className="text-sm">{t("createEvent.step5.noPhotoPlaceholder")}</p>
+              {/* Remove button overlay */}
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="sm"
+                  onClick={handleRemovePhoto}
+                  className="gap-2"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  {t("createEvent.step5.removePhoto")}
+                </Button>
               </div>
             </div>
+          ) : (
+            <button
+              type="button"
+              onClick={handleFileInputClick}
+              disabled={isUploading}
+              className="w-full aspect-video rounded-lg border-2 border-dashed border-border bg-muted/30 flex items-center justify-center hover:bg-muted/50 hover:border-primary/50 transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              <div className="text-center text-muted-foreground">
+                {isUploading ? (
+                  <Loader2 className="h-12 w-12 mx-auto mb-2 opacity-50 animate-spin" />
+                ) : (
+                  <ImageIcon className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                )}
+                <p className="text-sm">
+                  {isUploading 
+                    ? t("createEvent.step5.uploading") 
+                    : t("createEvent.step5.noPhotoPlaceholder")
+                  }
+                </p>
+              </div>
+            </button>
           )}
         </div>
       </div>
