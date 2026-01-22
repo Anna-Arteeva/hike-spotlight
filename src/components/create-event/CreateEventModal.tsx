@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { X, ArrowLeft } from "lucide-react";
+import { nextSaturday } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { ActivityTypeStep } from "./ActivityTypeStep";
 import { RouteSelectionStep } from "./RouteSelectionStep";
@@ -17,11 +18,17 @@ interface CreateEventModalProps {
   onClose: () => void;
 }
 
+const getNextSaturday = (): Date => {
+  const today = new Date();
+  // If today is Saturday, get next Saturday
+  return nextSaturday(today);
+};
+
 const getInitialFormData = (): CreateEventFormData => ({
   activityType: null,
   routeId: null,
-  date: null,
-  time: null,
+  date: getNextSaturday(),
+  time: "09:00",
 });
 
 export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
@@ -59,12 +66,8 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
   }, [formData]);
 
   const hasUnsavedChanges = useCallback((): boolean => {
-    return !!(
-      formData.activityType ||
-      formData.routeId ||
-      formData.date ||
-      formData.time
-    );
+    // Only consider it unsaved if user has selected an activity (started the flow)
+    return !!formData.activityType;
   }, [formData]);
 
   const handleClose = () => {
