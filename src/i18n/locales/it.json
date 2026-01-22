@@ -11,9 +11,9 @@
     "events": "Eventi",
     "routes": "Percorsi",
     "community": "Comunità",
-    "organizeEvent": "Organizza evento"
+    "createEvent": "Crea evento"
   },
-"events": {
+  "events": {
     "title": "Eventi",
     "upcomingEvents": "Eventi in arrivo",
     "fromLocation": "Da {{location}}",
@@ -79,6 +79,42 @@
         "tag": "Locale",
         "summary": "Anelli brevi con dislivello costante."
       }
+    }
+  },
+  "createEvent": {
+    "title": "Crea evento",
+    "close": "Chiudi",
+    "back": "Indietro",
+    "continue": "Continua",
+    "finish": "Crea evento",
+    "step1": {
+      "title": "Che tipo di avventura?",
+      "subtitle": "Scegli un'attività per iniziare"
+    },
+    "step2": {
+      "title": "Scegli un percorso per il tuo gruppo",
+      "subtitle": "Seleziona dai tuoi percorsi salvati o sfoglia quelli popolari",
+      "placeholder": "Selezione percorso in arrivo..."
+    },
+    "step3": {
+      "title": "Quando parti?",
+      "subtitle": "Scegli una data e un'ora per la tua avventura",
+      "timeLabel": "Ora di partenza",
+      "motivation": "Partire presto significa sentieri più freschi e viste migliori! ☀️"
+    },
+    "activities": {
+      "hiking": "Escursionismo",
+      "cycling": "Ciclismo",
+      "climbing": "Arrampicata",
+      "skiing": "Sci",
+      "bouldering": "Boulder",
+      "social": "Sociale"
+    },
+    "unsavedChanges": {
+      "title": "Hai modifiche non salvate",
+      "description": "Cosa vuoi fare?",
+      "continueEditing": "Continua a modificare",
+      "discard": "Elimina"
     }
   },
   "notFound": {
