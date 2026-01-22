@@ -50,7 +50,9 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
+          // Merge with defaults to ensure all fields exist (handles old localStorage data)
           setFormData({
+            ...getInitialFormData(),
             ...parsed,
             date: parsed.date ? new Date(parsed.date) : null,
           });
