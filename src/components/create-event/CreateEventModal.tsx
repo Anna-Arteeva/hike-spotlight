@@ -131,15 +131,6 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
     setIsSubmitting(true);
 
     try {
-      // Check if user is authenticated
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (!user) {
-        toast.error(t("createEvent.errors.notAuthenticated"));
-        setIsSubmitting(false);
-        return;
-      }
-
       // Build description with disclaimer if enabled
       let finalDescription = formData.description || "";
       if (formData.addDisclaimer) {
@@ -153,11 +144,14 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
         ? formData.activityType 
         : "hiking"; // Default to hiking for unsupported types
 
+      // Check if user is authenticated (optional - for organizer name)
+      const { data: { user } } = await supabase.auth.getUser();
+
       // Insert the event
       const { error } = await supabase
         .from("events")
         .insert({
-          user_id: user.id,
+          user_id: user?.id || null,
           title: formData.eventName,
           event_date: format(formData.date, "yyyy-MM-dd"),
           event_time: formData.time,
@@ -165,8 +159,8 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
           max_participants: formData.maxParticipants,
           description: finalDescription || null,
           image_url: formData.coverPhotoUrl,
-          organizer_name: user.email?.split("@")[0] || "Event Organizer",
-          departure_location: "To be announced", // Placeholder - could be enhanced later
+          organizer_name: user?.email?.split("@")[0] || "Anonymous Organizer",
+          departure_location: "To be announced",
         });
 
       if (error) {
