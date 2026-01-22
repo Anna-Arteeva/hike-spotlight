@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
@@ -10,7 +10,7 @@ import { MultiSelect } from './MultiSelect';
 import { DependentSelect } from './DependentSelect';
 import { RouteTypeToggle } from './RouteTypeToggle';
 import { DurationChips } from './DurationChips';
-import type { RouteFilters, Difficulty, Facility, Highlight, Feature, RouteType } from '@/types/route';
+import type { RouteFilters } from '@/types/route';
 import { FACILITIES, HIGHLIGHTS, FEATURES } from '@/types/route';
 import { getCountries, getRegionsByCountry } from '@/lib/routeUtils';
 
@@ -33,8 +33,8 @@ export function FilterDrawer({
   const regions = filters.country ? getRegionsByCountry(filters.country) : [];
 
   return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <Button variant="outline" className="gap-2">
           <SlidersHorizontal className="h-4 w-4" />
           Filters
@@ -44,17 +44,21 @@ export function FilterDrawer({
             </span>
           )}
         </Button>
-      </SheetTrigger>
-      <SheetContent side="right" className="w-full sm:max-w-md">
-        <SheetHeader>
-          <SheetTitle>Filter Routes</SheetTitle>
-        </SheetHeader>
+      </PopoverTrigger>
+      <PopoverContent 
+        align="start" 
+        className="w-[340px] sm:w-[400px] p-0 z-50 bg-popover border border-border shadow-lg"
+        sideOffset={8}
+      >
+        <div className="p-4 border-b border-border">
+          <h3 className="font-semibold text-foreground">Filter Routes</h3>
+        </div>
         
-        <ScrollArea className="h-[calc(100vh-10rem)] mt-6 pr-4">
-          <div className="space-y-6">
+        <ScrollArea className="h-[400px] px-4">
+          <div className="space-y-5 py-4">
             {/* Location */}
             <section>
-              <h3 className="text-sm font-semibold text-foreground mb-3">Location</h3>
+              <h4 className="text-sm font-medium text-foreground mb-2">Location</h4>
               <DependentSelect
                 countryValue={filters.country}
                 regionValue={filters.region}
@@ -69,7 +73,7 @@ export function FilterDrawer({
 
             {/* Difficulty */}
             <section>
-              <h3 className="text-sm font-semibold text-foreground mb-3">Difficulty (SAC Scale)</h3>
+              <h4 className="text-sm font-medium text-foreground mb-2">Difficulty (SAC Scale)</h4>
               <DifficultyChips
                 selected={filters.difficulty || []}
                 onChange={(difficulty) => onUpdateFilters({ difficulty })}
@@ -104,8 +108,8 @@ export function FilterDrawer({
             <Separator />
 
             {/* Duration */}
-            <section className="space-y-3">
-              <h3 className="text-sm font-semibold text-foreground">Duration</h3>
+            <section className="space-y-2">
+              <h4 className="text-sm font-medium text-foreground">Duration</h4>
               <DurationChips
                 value={{ min: filters.duration_min, max: filters.duration_max }}
                 onChange={({ min, max }) => onUpdateFilters({ duration_min: min, duration_max: max })}
@@ -174,15 +178,15 @@ export function FilterDrawer({
           </div>
         </ScrollArea>
 
-        <div className="flex gap-3 mt-6">
-          <Button variant="outline" className="flex-1" onClick={onClearFilters}>
+        <div className="flex gap-3 p-4 border-t border-border">
+          <Button variant="outline" size="sm" className="flex-1" onClick={onClearFilters}>
             Clear all
           </Button>
-          <Button className="flex-1" onClick={() => setOpen(false)}>
+          <Button size="sm" className="flex-1" onClick={() => setOpen(false)}>
             Show results
           </Button>
         </div>
-      </SheetContent>
-    </Sheet>
+      </PopoverContent>
+    </Popover>
   );
 }
