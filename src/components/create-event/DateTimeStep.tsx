@@ -37,7 +37,7 @@ export function DateTimeStep({
               selected={selectedDate ?? undefined}
               onSelect={onDateChange}
               disabled={(date) => date < new Date(new Date().setHours(0, 0, 0, 0))}
-              className="rounded-md"
+              className={cn("rounded-md pointer-events-auto")}
             />
           </div>
 
