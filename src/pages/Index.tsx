@@ -8,10 +8,11 @@ import { EventDetails } from "@/components/detail-view";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChevronDown, MapPin, Loader2 } from "lucide-react";
 import { useGeolocation } from "@/hooks/useGeolocation";
-import { useUpcomingEvents, formatEventTime, groupEventsByDate, formatEventDate } from "@/hooks/useEvents";
+import { useUpcomingEvents, formatEventTime, groupEventsByDate, formatEventDate, type Event } from "@/hooks/useEvents";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const { t } = useTranslation();
   const { city, loading, requestLocation, requested } = useGeolocation();
@@ -21,6 +22,18 @@ const Index = () => {
 
   // Group events by date
   const groupedEvents = events ? groupEventsByDate(events) : new Map();
+
+  const handleEventClick = (event: Event) => {
+    setSelectedEvent(event);
+    setIsEventModalOpen(true);
+  };
+
+  const handleModalClose = (open: boolean) => {
+    setIsEventModalOpen(open);
+    if (!open) {
+      setSelectedEvent(null);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -130,7 +143,7 @@ const Index = () => {
                         participants={event.current_participants}
                         availableSpots={event.max_participants - event.current_participants}
                         participantAvatars={["", "", "", "", ""]}
-                        onClick={() => setIsEventModalOpen(true)}
+                        onClick={() => handleEventClick(event)}
                       />
                     ))}
                   </section>
@@ -152,7 +165,11 @@ const Index = () => {
         </div>
       </div>
 
-      <EventDetails open={isEventModalOpen} onOpenChange={setIsEventModalOpen} />
+      <EventDetails 
+        open={isEventModalOpen} 
+        onOpenChange={handleModalClose} 
+        event={selectedEvent}
+      />
     </div>
   );
 };

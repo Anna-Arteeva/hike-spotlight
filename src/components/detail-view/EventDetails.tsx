@@ -7,13 +7,16 @@ import OrganizerSection from "./OrganizerSection";
 import ParticipantsSection from "./ParticipantsSection";
 import DiscussionSection from "./DiscussionSection";
 import RouteStats from "./RouteStats";
+import type { Event } from "@/hooks/useEvents";
+import { formatEventTime } from "@/hooks/useEvents";
 
 interface EventDetailsProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  event: Event | null;
 }
 
-// Sample data
+// Sample comments (would come from database in future)
 const sampleComments = [
   {
     id: "1",
@@ -29,27 +32,71 @@ const sampleComments = [
   },
 ];
 
-const routeStats = [
-  { label: "Distance", value: "29km", icon: "distance" as const },
-  { label: "Ascent", value: "500", icon: "ascent" as const },
-  { label: "Descent", value: "400", icon: "descent" as const },
-  { label: "Highest point", value: "1560", icon: "highest" as const },
-  { label: "Duration", value: "2:29", icon: "duration" as const },
-  { label: "Rating", value: "650", icon: "rating" as const },
-];
-
 const equipmentLeft = ["Hiking boots", "food and drinks", "Cash for the ticket"];
 const equipmentRight = ["Helmet", "Poles", "Headlamp"];
+
+// Helper to format date for display
+function formatDisplayDate(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    weekday: "long",
+  });
+}
+
+// Helper to get difficulty label
+function getDifficultyLabel(difficulty: string): string {
+  switch (difficulty) {
+    case "E":
+      return "T1 Easy";
+    case "E+":
+      return "T2 Easy+";
+    case "T":
+      return "T3 Moderate";
+    default:
+      return difficulty;
+  }
+}
+
+// Helper to get transport label
+function getTransportLabel(transport: string, subtext?: string | null): string {
+  if (subtext) return subtext;
+  switch (transport) {
+    case "train":
+      return "Train";
+    case "bus":
+      return "Bus";
+    case "none":
+      return "No transport";
+    default:
+      return transport;
+  }
+}
 
 export const EventDetails: React.FC<EventDetailsProps> = ({
   open,
   onOpenChange,
+  event,
 }) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
+  if (!event) {
+    return null;
+  }
+
+  const routeStats = [
+    { label: "Distance", value: event.distance || "N/A", icon: "distance" as const },
+    { label: "Ascent", value: event.elevation || "N/A", icon: "ascent" as const },
+    { label: "Descent", value: event.elevation_type === "descent" ? event.elevation || "N/A" : "N/A", icon: "descent" as const },
+    { label: "Highest point", value: "N/A", icon: "highest" as const },
+    { label: "Duration", value: event.duration_text || "N/A", icon: "duration" as const },
+    { label: "Rating", value: "N/A", icon: "rating" as const },
+  ];
+
   const photoGallery = (
     <PhotoGallery
-      images={[]}
+      images={event.image_url ? [event.image_url] : []}
       onAddPhotos={() => console.log("Add photos")}
       addPhotoLabel="Add route photos"
     />
@@ -59,32 +106,34 @@ export const EventDetails: React.FC<EventDetailsProps> = ({
     <div className="space-y-8 pb-8">
       {/* Date and Time */}
       <div>
-        <p className="text-lg font-medium">May 10, Sunday</p>
-        <p className="text-sm text-muted-foreground">06:40 AM - 17:00 PM</p>
+        <p className="text-lg font-medium">{formatDisplayDate(event.event_date)}</p>
+        <p className="text-sm text-muted-foreground">
+          {formatEventTime(event.event_time)} - {event.duration_text || "TBD"}
+        </p>
       </div>
 
       {/* Title */}
       <h1 className="text-2xl font-bold leading-tight">
-        Pottenstein ring: A land of caves and castles, rivers and rocks
+        {event.title}
       </h1>
 
       {/* Activity Details */}
       <div className="grid grid-cols-4 gap-6 text-sm">
         <div>
           <p className="text-muted-foreground">Activity</p>
-          <p className="font-medium">Hiking</p>
+          <p className="font-medium capitalize">{event.activity}</p>
         </div>
         <div>
           <p className="text-muted-foreground">Difficulty</p>
-          <p className="font-medium">T3 Moderate</p>
+          <p className="font-medium">{getDifficultyLabel(event.difficulty)}</p>
         </div>
         <div>
           <p className="text-muted-foreground">Departs from</p>
-          <p className="font-medium">Munich</p>
+          <p className="font-medium">{event.departure_location}</p>
         </div>
         <div>
           <p className="text-muted-foreground">Transport</p>
-          <p className="font-medium">Train, bus</p>
+          <p className="font-medium">{getTransportLabel(event.transport, event.transport_subtext)}</p>
         </div>
       </div>
 
@@ -103,43 +152,41 @@ export const EventDetails: React.FC<EventDetailsProps> = ({
       <div className="space-y-3">
         <h2 className="text-xl font-semibold">Description</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Many poets and painters walked through the countryside of Franconian
-          Switzerland hundreds years ago and catched it in word and on paintings.
-          Franconian Switzerland is one of the largest nature parks in Germany and a real
-          hidden gem. The area is very well known for its impressive caves, rock formations
-          and green scenery. Also, there are many medieval castles and ruins..
+          {event.description || "No description available for this event."}
         </p>
-        <button
-          onClick={() => setShowFullDescription(!showFullDescription)}
-          className="text-primary text-sm hover:underline"
-        >
-          Show more
-        </button>
+        {event.description && event.description.length > 200 && (
+          <button
+            onClick={() => setShowFullDescription(!showFullDescription)}
+            className="text-primary text-sm hover:underline"
+          >
+            {showFullDescription ? "Show less" : "Show more"}
+          </button>
+        )}
       </div>
 
       {/* Meeting and Transport */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">Meeting and transport</h2>
         <p className="text-muted-foreground">
-          We meet on platform and buy a group ticket all together.
+          Meet at the departure location before the scheduled time.
         </p>
         
         <div className="grid grid-cols-2 gap-6 text-sm">
           <div>
             <p className="text-muted-foreground">Meeting location</p>
-            <p className="font-medium">Munich HBF, Platform 29</p>
+            <p className="font-medium">{event.departure_location}</p>
           </div>
           <div>
             <p className="text-muted-foreground">Meeting time</p>
-            <p className="font-medium">6:40 AM</p>
+            <p className="font-medium">{formatEventTime(event.event_time)}</p>
           </div>
           <div>
             <p className="text-muted-foreground">Transport</p>
-            <p className="font-medium">Train, bus 145 to Lindau</p>
+            <p className="font-medium">{getTransportLabel(event.transport, event.transport_subtext)}</p>
           </div>
           <div>
-            <p className="text-muted-foreground">Ticket price</p>
-            <p className="font-medium">€16 per person</p>
+            <p className="text-muted-foreground">Duration</p>
+            <p className="font-medium">{event.duration_text || "TBD"}</p>
           </div>
         </div>
       </div>
@@ -173,8 +220,8 @@ export const EventDetails: React.FC<EventDetailsProps> = ({
   const sidebar = (
     <div className="space-y-6">
       <OrganizerSection
-        name="John Doe"
-        badge="Badge"
+        name={event.organizer_name}
+        badge="Organizer"
         onSendMessage={() => console.log("Send message")}
         label="Organizer"
       />
@@ -182,8 +229,8 @@ export const EventDetails: React.FC<EventDetailsProps> = ({
       <Separator />
 
       <ParticipantsSection
-        currentParticipants={12}
-        maxParticipants={20}
+        currentParticipants={event.current_participants}
+        maxParticipants={event.max_participants}
         participantAvatars={["", "", "", "", "", ""]}
         onJoin={() => console.log("Join")}
       />
@@ -201,6 +248,8 @@ export const EventDetails: React.FC<EventDetailsProps> = ({
       photoGallery={photoGallery}
       mainContent={mainContent}
       sidebar={sidebar}
+      title={event.title}
+      description={event.description || "Event details"}
     />
   );
 };
