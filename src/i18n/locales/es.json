@@ -11,9 +11,9 @@
     "events": "Eventos",
     "routes": "Rutas",
     "community": "Comunidad",
-    "organizeEvent": "Organizar evento"
+    "createEvent": "Crear evento"
   },
-"events": {
+  "events": {
     "title": "Eventos",
     "upcomingEvents": "Próximos eventos",
     "fromLocation": "Desde {{location}}",
@@ -79,6 +79,42 @@
         "tag": "Local",
         "summary": "Bucles cortos con ganancia de elevación constante."
       }
+    }
+  },
+  "createEvent": {
+    "title": "Crear evento",
+    "close": "Cerrar",
+    "back": "Volver",
+    "continue": "Continuar",
+    "finish": "Crear evento",
+    "step1": {
+      "title": "¿Qué tipo de aventura?",
+      "subtitle": "Elige una actividad para empezar"
+    },
+    "step2": {
+      "title": "Elige una ruta para tu grupo",
+      "subtitle": "Selecciona de tus rutas guardadas o explora las populares",
+      "placeholder": "Selección de ruta próximamente..."
+    },
+    "step3": {
+      "title": "¿Cuándo sales?",
+      "subtitle": "Elige una fecha y hora para tu aventura",
+      "timeLabel": "Hora de salida",
+      "motivation": "¡Salir temprano significa senderos más frescos y mejores vistas! ☀️"
+    },
+    "activities": {
+      "hiking": "Senderismo",
+      "cycling": "Ciclismo",
+      "climbing": "Escalada",
+      "skiing": "Esquí",
+      "bouldering": "Búlder",
+      "social": "Social"
+    },
+    "unsavedChanges": {
+      "title": "Tienes cambios sin guardar",
+      "description": "¿Qué te gustaría hacer?",
+      "continueEditing": "Seguir editando",
+      "discard": "Descartar"
     }
   },
   "notFound": {

@@ -11,9 +11,9 @@
     "events": "Événements",
     "routes": "Itinéraires",
     "community": "Communauté",
-    "organizeEvent": "Organiser un événement"
+    "createEvent": "Créer un événement"
   },
-"events": {
+  "events": {
     "title": "Événements",
     "upcomingEvents": "Événements à venir",
     "fromLocation": "Depuis {{location}}",
@@ -79,6 +79,42 @@
         "tag": "Local",
         "summary": "Boucles courtes avec un dénivelé régulier."
       }
+    }
+  },
+  "createEvent": {
+    "title": "Créer un événement",
+    "close": "Fermer",
+    "back": "Retour",
+    "continue": "Continuer",
+    "finish": "Créer l'événement",
+    "step1": {
+      "title": "Quel type d'aventure ?",
+      "subtitle": "Choisissez une activité pour commencer"
+    },
+    "step2": {
+      "title": "Choisissez un itinéraire pour votre groupe",
+      "subtitle": "Sélectionnez parmi vos itinéraires enregistrés ou parcourez les plus populaires",
+      "placeholder": "Sélection d'itinéraire à venir..."
+    },
+    "step3": {
+      "title": "Quand partez-vous ?",
+      "subtitle": "Choisissez une date et une heure pour votre aventure",
+      "timeLabel": "Heure de départ",
+      "motivation": "Les départs matinaux signifient des sentiers plus frais et de meilleures vues ! ☀️"
+    },
+    "activities": {
+      "hiking": "Randonnée",
+      "cycling": "Vélo",
+      "climbing": "Escalade",
+      "skiing": "Ski",
+      "bouldering": "Bloc",
+      "social": "Social"
+    },
+    "unsavedChanges": {
+      "title": "Vous avez des modifications non enregistrées",
+      "description": "Que souhaitez-vous faire ?",
+      "continueEditing": "Continuer l'édition",
+      "discard": "Abandonner"
     }
   },
   "notFound": {

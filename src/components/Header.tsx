@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
+import { Search, Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
-import CreateEventModal from "./CreateEventModal";
+import { CreateEventModal } from "@/components/create-event";
 
 export default function Header() {
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -56,13 +57,17 @@ export default function Header() {
                 >
                   {t('nav.community')}
                 </Link>
-                <button
-                  onClick={() => setIsCreateEventModalOpen(true)}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {t('nav.organizeEvent')}
-                </button>
               </nav>
+
+              {/* Create Event Button */}
+              <Button
+                onClick={() => setIsCreateEventModalOpen(true)}
+                size="sm"
+                className="gap-2"
+              >
+                <Plus className="h-4 w-4" aria-hidden="true" />
+                <span className="hidden sm:inline">{t('nav.createEvent')}</span>
+              </Button>
 
               {/* Search */}
               <div className="flex items-center gap-2">

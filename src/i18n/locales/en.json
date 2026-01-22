@@ -11,9 +11,9 @@
     "events": "Events",
     "routes": "Routes list",
     "community": "Community",
-    "organizeEvent": "Organize event"
+    "createEvent": "Create Event"
   },
-"events": {
+  "events": {
     "title": "Events",
     "upcomingEvents": "Upcoming events",
     "fromLocation": "From {{location}}",
@@ -79,6 +79,42 @@
         "tag": "Local",
         "summary": "Short loops with steady elevation gain."
       }
+    }
+  },
+  "createEvent": {
+    "title": "Create Event",
+    "close": "Close",
+    "back": "Go back",
+    "continue": "Continue",
+    "finish": "Create Event",
+    "step1": {
+      "title": "What kind of adventure?",
+      "subtitle": "Pick an activity type to get started"
+    },
+    "step2": {
+      "title": "Pick a route for your group",
+      "subtitle": "Choose from your saved routes or browse popular ones",
+      "placeholder": "Route selection coming soon..."
+    },
+    "step3": {
+      "title": "When are you heading out?",
+      "subtitle": "Choose a date and time for your adventure",
+      "timeLabel": "Start time",
+      "motivation": "Early starts mean cooler trails and better views! ☀️"
+    },
+    "activities": {
+      "hiking": "Hiking",
+      "cycling": "Cycling",
+      "climbing": "Climbing",
+      "skiing": "Skiing",
+      "bouldering": "Bouldering",
+      "social": "Social"
+    },
+    "unsavedChanges": {
+      "title": "You have unsaved changes",
+      "description": "What would you like to do?",
+      "continueEditing": "Continue editing",
+      "discard": "Discard"
     }
   },
   "notFound": {
