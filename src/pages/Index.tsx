@@ -8,18 +8,19 @@ import { EventDetails } from "@/components/detail-view";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { ChevronDown, MapPin, Loader2 } from "lucide-react";
 import { useGeolocation } from "@/hooks/useGeolocation";
-import event1 from "@/assets/event1.jpg";
-import event2 from "@/assets/event2.jpg";
-import event3 from "@/assets/event3.jpg";
-import event4 from "@/assets/event4.jpg";
-import event5 from "@/assets/event5.jpg";
-import event6 from "@/assets/event6.jpg";
+import { useUpcomingEvents, formatEventTime, groupEventsByDate, formatEventDate } from "@/hooks/useEvents";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Index = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const { t } = useTranslation();
   const { city, loading, requestLocation, requested } = useGeolocation();
   const [eventsParent] = useAutoAnimate();
+  
+  const { data: events, isLoading, error } = useUpcomingEvents();
+
+  // Group events by date
+  const groupedEvents = events ? groupEventsByDate(events) : new Map();
 
   return (
     <div className="min-h-screen bg-background">
@@ -70,148 +71,78 @@ const Index = () => {
               <TabsContent value="all" className="sr-only" />
             </Tabs>
 
-            {/* Events List */}
-            <section ref={eventsParent} className="mb-8" aria-labelledby="tomorrow-heading">
-              <div className="flex items-center justify-between mb-4">
-                <h2 id="tomorrow-heading" className="text-lg font-semibold">{t('events.tomorrowSaturday')}</h2>
-                <div className="flex gap-20 text-xs text-muted-foreground">
-                  <span>{t('events.departingFrom')}</span>
-                  <span>{t('events.activity')}</span>
-                  <span>{t('events.participants')}</span>
-                </div>
+            {/* Loading State */}
+            {isLoading && (
+              <div className="space-y-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="flex gap-6 py-4">
+                    <Skeleton className="w-16 h-16" />
+                    <Skeleton className="w-16 h-16 rounded" />
+                    <div className="flex-1 space-y-2">
+                      <Skeleton className="h-4 w-3/4" />
+                      <Skeleton className="h-3 w-1/2" />
+                    </div>
+                  </div>
+                ))}
               </div>
-              
-              <EventCard
-                time="6:45"
-                timeSubtext="3 days"
-                image={event1}
-                title="A very long event name bla second line"
-                organizer="Jessica"
-                organizerAvatar=""
-                departure="Munich Hbf, pl 29"
-                transport="train"
-                transportSubtext="Train"
-                activity="hiking"
-                difficulty="E"
-                distance="18km"
-                elevation="1982"
-                elevationType="total height"
-                participants={12}
-                availableSpots={4}
-                participantAvatars={["", "", "", "", ""]}
-                onClick={() => setIsEventModalOpen(true)}
-              />
-              
-              <EventCard
-                time="6:45"
-                timeSubtext="12 hours"
-                image={event2}
-                title="Rofanspitze"
-                organizer="Helena"
-                organizerAvatar=""
-                departure="Munich"
-                transport="none"
-                transportSubtext="Carpool"
-                activity="cycling"
-                difficulty="E+"
-                distance="18km"
-                elevation="1982"
-                elevationType="descent"
-                participants={20}
-                availableSpots={20}
-                participantAvatars={["", "", "", "", ""]}
-                onClick={() => setIsEventModalOpen(true)}
-              />
-              
-              <EventCard
-                time="6:45"
-                timeSubtext="1 day"
-                image={event3}
-                title="Tannheimer Berge"
-                organizer="John Doe"
-                organizerAvatar=""
-                departure="Munich"
-                transport="bus"
-                transportSubtext="Bus"
-                activity="hiking"
-                difficulty="E"
-                distance="18km"
-                elevation="2234"
-                elevationType="total height"
-                participants={12}
-                availableSpots={4}
-                participantAvatars={["", "", "", "", ""]}
-                onClick={() => setIsEventModalOpen(true)}
-              />
-              
-              <EventCard
-                time="8:00"
-                timeSubtext="12 days"
-                image={event4}
-                title="Event name bla second line"
-                organizer="Freddy"
-                organizerAvatar=""
-                departure="Munich Hbf"
-                transport="none"
-                transportSubtext="No transport"
-                activity="hiking"
-                difficulty="E"
-                distance="18km"
-                elevation="1800"
-                elevationType="descent"
-                participants={20}
-                availableSpots={20}
-                participantAvatars={["", "", "", "", ""]}
-                onClick={() => setIsEventModalOpen(true)}
-              />
-            </section>
-            
-            {/* Jun 23, Sunday */}
-            <section aria-labelledby="jun23-heading">
-              <h2 id="jun23-heading" className="text-lg font-semibold mb-4">Jun 23, Sunday</h2>
-              
-              <EventCard
-                time="6:45"
-                timeSubtext="12 hours"
-                image={event5}
-                title="Event name bla second line"
-                organizer="Larissa"
-                organizerAvatar=""
-                departure="Zurich Hbf"
-                transport="bus"
-                transportSubtext="Bus"
-                activity="hiking"
-                difficulty="E"
-                distance="18km"
-                elevation="2234"
-                elevationType="total height"
-                participants={12}
-                availableSpots={4}
-                participantAvatars={["", "", "", "", ""]}
-                onClick={() => setIsEventModalOpen(true)}
-              />
-              
-              <EventCard
-                time="6:45"
-                timeSubtext="1 day"
-                image={event6}
-                title="Hiking the highest peak"
-                organizer="Laurence"
-                organizerAvatar=""
-                departure="Munich deutsche..."
-                transport="none"
-                transportSubtext="No transport"
-                activity="hiking"
-                difficulty="E"
-                distance="18km"
-                elevation="1800"
-                elevationType="descent"
-                participants={20}
-                availableSpots={20}
-                participantAvatars={["", "", "", "", ""]}
-                onClick={() => setIsEventModalOpen(true)}
-              />
-            </section>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="text-center py-8 text-destructive">
+                <p>Failed to load events. Please try again later.</p>
+              </div>
+            )}
+
+            {/* Events List */}
+            {!isLoading && !error && (
+              <div ref={eventsParent}>
+                {Array.from(groupedEvents.entries()).map(([dateKey, dateEvents]) => (
+                  <section key={dateKey} className="mb-8" aria-labelledby={`heading-${dateKey}`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 id={`heading-${dateKey}`} className="text-lg font-semibold">
+                        {formatEventDate(dateKey)}
+                      </h2>
+                      <div className="flex gap-20 text-xs text-muted-foreground">
+                        <span>{t('events.departingFrom')}</span>
+                        <span>{t('events.activity')}</span>
+                        <span>{t('events.participants')}</span>
+                      </div>
+                    </div>
+                    
+                    {dateEvents.map((event) => (
+                      <EventCard
+                        key={event.id}
+                        time={formatEventTime(event.event_time)}
+                        timeSubtext={event.duration_text || ""}
+                        image={event.image_url || ""}
+                        title={event.title}
+                        organizer={event.organizer_name}
+                        organizerAvatar={event.organizer_avatar || ""}
+                        departure={event.departure_location}
+                        transport={event.transport}
+                        transportSubtext={event.transport_subtext || undefined}
+                        activity={event.activity}
+                        difficulty={event.difficulty}
+                        distance={event.distance || ""}
+                        elevation={event.elevation || ""}
+                        elevationType={event.elevation_type || "total height"}
+                        participants={event.current_participants}
+                        availableSpots={event.max_participants - event.current_participants}
+                        participantAvatars={["", "", "", "", ""]}
+                        onClick={() => setIsEventModalOpen(true)}
+                      />
+                    ))}
+                  </section>
+                ))}
+
+                {groupedEvents.size === 0 && (
+                  <div className="text-center py-12 text-muted-foreground">
+                    <p>No upcoming events found.</p>
+                  </div>
+                )}
+              </div>
+            )}
           </main>
 
           {/* Sidebar */}
