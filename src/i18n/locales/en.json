@@ -87,6 +87,13 @@
     "back": "Go back",
     "continue": "Continue",
     "finish": "Create Event",
+    "creating": "Creating...",
+    "success": "Event created successfully!",
+    "errors": {
+      "missingFields": "Please fill in all required fields",
+      "notAuthenticated": "Please sign in to create an event",
+      "createFailed": "Failed to create event. Please try again."
+    },
     "step1": {
       "title": "What kind of adventure?",
       "subtitle": "Pick an activity type to get started"

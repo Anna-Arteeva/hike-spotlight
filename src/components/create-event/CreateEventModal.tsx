@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { X, ArrowLeft } from "lucide-react";
-import { nextSaturday } from "date-fns";
+import { X, ArrowLeft, Loader2 } from "lucide-react";
+import { nextSaturday, format } from "date-fns";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ActivityTypeStep } from "./ActivityTypeStep";
 import { RouteSelectionStep } from "./RouteSelectionStep";
@@ -10,6 +11,7 @@ import { EventDetailsStep } from "./EventDetailsStep";
 import { EventDescriptionStep } from "./EventDescriptionStep";
 import { ProgressIndicator } from "./ProgressIndicator";
 import { UnsavedChangesDialog } from "./UnsavedChangesDialog";
+import { supabase } from "@/integrations/supabase/client";
 import type { ActivityType, CreateEventFormData } from "./types";
 import { ACTIVITIES_WITH_ROUTES, getStepsForActivity } from "./types";
 
@@ -37,11 +39,15 @@ const getInitialFormData = (): CreateEventFormData => ({
   coverPhotoUrl: null,
 });
 
+// Disclaimer text to append to description when enabled
+const DISCLAIMER_TEXT = "⚠️ Disclaimer: Hiking can be dangerous. I am not a mountain guide. Everybody is responsible for her/himself. Make yourself familiar with the route and its requirements. It's recommended to download a map and bring a cell phone and first aid kit for emergencies.";
+
 export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<CreateEventFormData>(getInitialFormData);
   const [showUnsavedDialog, setShowUnsavedDialog] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Load saved data from localStorage on mount
   useEffect(() => {
@@ -114,11 +120,81 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
   };
 
   /**
+   * Save event to database
+   */
+  const handleCreateEvent = async () => {
+    if (!formData.activityType || !formData.date || !formData.time || !formData.eventName) {
+      toast.error(t("createEvent.errors.missingFields"));
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Check if user is authenticated
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast.error(t("createEvent.errors.notAuthenticated"));
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Build description with disclaimer if enabled
+      let finalDescription = formData.description || "";
+      if (formData.addDisclaimer) {
+        finalDescription = finalDescription 
+          ? `${finalDescription}\n\n${DISCLAIMER_TEXT}`
+          : DISCLAIMER_TEXT;
+      }
+
+      // Map activity type to database enum (only hiking and cycling are supported in DB)
+      const dbActivity = formData.activityType === "hiking" || formData.activityType === "cycling" 
+        ? formData.activityType 
+        : "hiking"; // Default to hiking for unsupported types
+
+      // Insert the event
+      const { error } = await supabase
+        .from("events")
+        .insert({
+          user_id: user.id,
+          title: formData.eventName,
+          event_date: format(formData.date, "yyyy-MM-dd"),
+          event_time: formData.time,
+          activity: dbActivity,
+          max_participants: formData.maxParticipants,
+          description: finalDescription || null,
+          image_url: formData.coverPhotoUrl,
+          organizer_name: user.email?.split("@")[0] || "Event Organizer",
+          departure_location: "To be announced", // Placeholder - could be enhanced later
+        });
+
+      if (error) {
+        console.error("Error creating event:", error);
+        toast.error(t("createEvent.errors.createFailed"));
+        setIsSubmitting(false);
+        return;
+      }
+
+      toast.success(t("createEvent.success"));
+      
+      // Clear draft and close modal
+      localStorage.removeItem(STORAGE_KEY);
+      setFormData(getInitialFormData());
+      setCurrentStep(1);
+      onClose();
+    } catch (error) {
+      console.error("Error creating event:", error);
+      toast.error(t("createEvent.errors.createFailed"));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  /**
    * Navigation logic for continue button
    */
   const handleContinue = () => {
-    const totalSteps = getStepsForActivity(formData.activityType);
-    
     if (currentStep === 1 && formData.activityType) {
       // If activity doesn't need route, skip to date/time (step 3)
       if (!ACTIVITIES_WITH_ROUTES.includes(formData.activityType)) {
@@ -130,8 +206,7 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
       setCurrentStep((prev) => prev + 1);
     } else {
       // Last step - handle form submission
-      console.log("Form submitted:", formData);
-      handleDiscard(); // For now, just close
+      handleCreateEvent();
     }
   };
 
@@ -302,10 +377,19 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
           <div className="flex justify-end">
             <Button
               onClick={handleContinue}
-              disabled={!canContinue()}
+              disabled={!canContinue() || isSubmitting}
               size="lg"
             >
-              {isLastStep() ? t("createEvent.finish") : t("createEvent.continue")}
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  {t("createEvent.creating")}
+                </>
+              ) : isLastStep() ? (
+                t("createEvent.finish")
+              ) : (
+                t("createEvent.continue")
+              )}
             </Button>
           </div>
         </footer>
