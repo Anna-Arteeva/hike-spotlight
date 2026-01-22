@@ -94,7 +94,8 @@
     "step2": {
       "title": "Choisissez un itinéraire pour votre groupe",
       "subtitle": "Sélectionnez parmi vos itinéraires enregistrés ou parcourez les plus populaires",
-      "placeholder": "Sélection d'itinéraire à venir..."
+      "placeholder": "Sélection d'itinéraire à venir...",
+      "selected": "Sélectionné"
     },
     "step3": {
       "title": "Quand partez-vous ?",

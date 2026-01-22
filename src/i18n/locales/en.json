@@ -94,7 +94,8 @@
     "step2": {
       "title": "Pick a route for your group",
       "subtitle": "Choose from your saved routes or browse popular ones",
-      "placeholder": "Route selection coming soon..."
+      "placeholder": "Route selection coming soon...",
+      "selected": "Selected"
     },
     "step3": {
       "title": "When are you heading out?",
