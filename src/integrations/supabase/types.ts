@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      events: {
+        Row: {
+          activity: Database["public"]["Enums"]["activity_type"]
+          created_at: string
+          current_participants: number
+          departure_location: string
+          description: string | null
+          difficulty: Database["public"]["Enums"]["difficulty_level"]
+          distance: string | null
+          duration_text: string | null
+          elevation: string | null
+          elevation_type: Database["public"]["Enums"]["elevation_type"] | null
+          event_date: string
+          event_time: string
+          id: string
+          image_url: string | null
+          max_participants: number
+          organizer_avatar: string | null
+          organizer_name: string
+          title: string
+          transport: Database["public"]["Enums"]["transport_type"]
+          transport_subtext: string | null
+          updated_at: string
+        }
+        Insert: {
+          activity?: Database["public"]["Enums"]["activity_type"]
+          created_at?: string
+          current_participants?: number
+          departure_location: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["difficulty_level"]
+          distance?: string | null
+          duration_text?: string | null
+          elevation?: string | null
+          elevation_type?: Database["public"]["Enums"]["elevation_type"] | null
+          event_date: string
+          event_time: string
+          id?: string
+          image_url?: string | null
+          max_participants?: number
+          organizer_avatar?: string | null
+          organizer_name: string
+          title: string
+          transport?: Database["public"]["Enums"]["transport_type"]
+          transport_subtext?: string | null
+          updated_at?: string
+        }
+        Update: {
+          activity?: Database["public"]["Enums"]["activity_type"]
+          created_at?: string
+          current_participants?: number
+          departure_location?: string
+          description?: string | null
+          difficulty?: Database["public"]["Enums"]["difficulty_level"]
+          distance?: string | null
+          duration_text?: string | null
+          elevation?: string | null
+          elevation_type?: Database["public"]["Enums"]["elevation_type"] | null
+          event_date?: string
+          event_time?: string
+          id?: string
+          image_url?: string | null
+          max_participants?: number
+          organizer_avatar?: string | null
+          organizer_name?: string
+          title?: string
+          transport?: Database["public"]["Enums"]["transport_type"]
+          transport_subtext?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +94,10 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      activity_type: "hiking" | "cycling"
+      difficulty_level: "E" | "E+" | "T"
+      elevation_type: "total height" | "descent"
+      transport_type: "train" | "bus" | "none"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +224,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      activity_type: ["hiking", "cycling"],
+      difficulty_level: ["E", "E+", "T"],
+      elevation_type: ["total height", "descent"],
+      transport_type: ["train", "bus", "none"],
+    },
   },
 } as const
