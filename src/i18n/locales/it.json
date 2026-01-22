@@ -103,6 +103,27 @@
       "timeLabel": "Ora di partenza",
       "motivation": "Partire presto significa sentieri più freschi e viste migliori! ☀️"
     },
+    "step4": {
+      "title": "Dettagli dell'evento",
+      "subtitle": "Dai un nome al tuo evento e imposta la dimensione del gruppo",
+      "eventName": "Nome evento",
+      "eventNamePlaceholder": "Dai un nome accattivante al tuo evento",
+      "maxParticipants": "Numero di partecipanti"
+    },
+    "step5": {
+      "title": "Descrivi il tuo evento",
+      "subtitle": "Aiuta i partecipanti a sapere cosa aspettarsi",
+      "descriptionLabel": "Descrizione",
+      "descriptionPlaceholder": "Scrivi la tua descrizione qui",
+      "clearDescription": "Cancella descrizione",
+      "addDisclaimer": "Aggiungi disclaimer",
+      "disclaimerTitle": "Disclaimer",
+      "disclaimerText": "L'escursionismo può essere pericoloso. Non sono una guida alpina. Ognuno è responsabile di se stesso. Familiarizza con il percorso e i suoi requisiti. Si consiglia di scaricare una mappa e portare un cellulare e un kit di primo soccorso per le emergenze.",
+      "coverPhoto": "Foto di copertina",
+      "uploadNewPhoto": "Carica nuova foto",
+      "coverPhotoAlt": "Foto di copertina dell'evento",
+      "noPhotoPlaceholder": "Nessuna foto selezionata"
+    },
     "activities": {
       "hiking": "Escursionismo",
       "cycling": "Ciclismo",

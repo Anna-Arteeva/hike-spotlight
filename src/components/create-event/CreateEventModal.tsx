@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { ActivityTypeStep } from "./ActivityTypeStep";
 import { RouteSelectionStep } from "./RouteSelectionStep";
 import { DateTimeStep } from "./DateTimeStep";
+import { EventDetailsStep } from "./EventDetailsStep";
+import { EventDescriptionStep } from "./EventDescriptionStep";
 import { ProgressIndicator } from "./ProgressIndicator";
 import { UnsavedChangesDialog } from "./UnsavedChangesDialog";
 import type { ActivityType, CreateEventFormData } from "./types";
@@ -20,7 +22,6 @@ interface CreateEventModalProps {
 
 const getNextSaturday = (): Date => {
   const today = new Date();
-  // If today is Saturday, get next Saturday
   return nextSaturday(today);
 };
 
@@ -29,6 +30,11 @@ const getInitialFormData = (): CreateEventFormData => ({
   routeId: null,
   date: getNextSaturday(),
   time: "09:00",
+  eventName: "",
+  maxParticipants: 10,
+  description: "",
+  addDisclaimer: false,
+  coverPhotoUrl: null,
 });
 
 export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
@@ -56,7 +62,6 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
   }, [open]);
 
   const hasUnsavedChanges = useCallback((): boolean => {
-    // Only consider it unsaved if user has selected an activity (started the flow)
     return !!formData.activityType;
   }, [formData.activityType]);
 
@@ -90,10 +95,15 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
     setShowUnsavedDialog(false);
   };
 
+  /**
+   * Navigation logic for back button
+   * For activities WITH routes: 1 -> 2 -> 3 -> 4 -> 5
+   * For activities WITHOUT routes: 1 -> 3 -> 4 -> 5 (skip step 2)
+   */
   const handleBack = () => {
     if (currentStep === 1) return;
     
-    // If on date step and activity doesn't need route, go back to activity
+    // If going back from step 3 and activity doesn't need route, go to step 1
     if (currentStep === 3 && formData.activityType && !ACTIVITIES_WITH_ROUTES.includes(formData.activityType)) {
       setCurrentStep(1);
     } else {
@@ -101,21 +111,29 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
     }
   };
 
+  /**
+   * Navigation logic for continue button
+   */
   const handleContinue = () => {
     const totalSteps = getStepsForActivity(formData.activityType);
     
     if (currentStep === 1 && formData.activityType) {
-      // If activity doesn't need route, skip to date/time
+      // If activity doesn't need route, skip to date/time (step 3)
       if (!ACTIVITIES_WITH_ROUTES.includes(formData.activityType)) {
         setCurrentStep(3);
       } else {
         setCurrentStep(2);
       }
-    } else if (currentStep < totalSteps) {
+    } else if (currentStep < 5) {
       setCurrentStep((prev) => prev + 1);
+    } else {
+      // Last step - handle form submission
+      console.log("Form submitted:", formData);
+      handleDiscard(); // For now, just close
     }
   };
 
+  // Form data handlers
   const handleActivitySelect = (activity: ActivityType) => {
     setFormData((prev) => ({ ...prev, activityType: activity }));
   };
@@ -132,12 +150,41 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
     setFormData((prev) => ({ ...prev, time }));
   };
 
+  const handleEventNameChange = (eventName: string) => {
+    setFormData((prev) => ({ ...prev, eventName }));
+  };
+
+  const handleMaxParticipantsChange = (maxParticipants: number) => {
+    setFormData((prev) => ({ ...prev, maxParticipants }));
+  };
+
+  const handleDescriptionChange = (description: string) => {
+    setFormData((prev) => ({ ...prev, description }));
+  };
+
+  const handleAddDisclaimerChange = (addDisclaimer: boolean) => {
+    setFormData((prev) => ({ ...prev, addDisclaimer }));
+  };
+
+  const handleCoverPhotoChange = (coverPhotoUrl: string | null) => {
+    setFormData((prev) => ({ ...prev, coverPhotoUrl }));
+  };
+
+  /**
+   * Calculate display step number for progress indicator
+   * For activities without routes, we skip step 2 (route selection)
+   */
   const getDisplayStep = (): number => {
     if (!formData.activityType || ACTIVITIES_WITH_ROUTES.includes(formData.activityType)) {
       return currentStep;
     }
-    // For activities without route, step 3 displays as step 2
-    return currentStep === 3 ? 2 : currentStep;
+    // For activities without route:
+    // currentStep 1 -> display 1
+    // currentStep 3 -> display 2
+    // currentStep 4 -> display 3
+    // currentStep 5 -> display 4
+    if (currentStep === 1) return 1;
+    return currentStep - 1;
   };
 
   const canContinue = (): boolean => {
@@ -145,18 +192,20 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
       case 1:
         return !!formData.activityType;
       case 2:
-        // Route step - for now always allow (stub)
-        return true;
+        return true; // Route step - optional for now
       case 3:
         return !!formData.date && !!formData.time;
+      case 4:
+        return formData.eventName.trim().length > 0;
+      case 5:
+        return true; // Description is optional
       default:
         return false;
     }
   };
 
   const isLastStep = (): boolean => {
-    const totalSteps = getStepsForActivity(formData.activityType);
-    return getDisplayStep() === totalSteps;
+    return currentStep === 5;
   };
 
   if (!open) return null;
@@ -224,6 +273,24 @@ export function CreateEventModal({ open, onClose }: CreateEventModalProps) {
               selectedTime={formData.time}
               onDateChange={handleDateChange}
               onTimeChange={handleTimeChange}
+            />
+          )}
+          {currentStep === 4 && (
+            <EventDetailsStep
+              eventName={formData.eventName}
+              maxParticipants={formData.maxParticipants}
+              onEventNameChange={handleEventNameChange}
+              onMaxParticipantsChange={handleMaxParticipantsChange}
+            />
+          )}
+          {currentStep === 5 && (
+            <EventDescriptionStep
+              description={formData.description}
+              addDisclaimer={formData.addDisclaimer}
+              coverPhotoUrl={formData.coverPhotoUrl}
+              onDescriptionChange={handleDescriptionChange}
+              onAddDisclaimerChange={handleAddDisclaimerChange}
+              onCoverPhotoChange={handleCoverPhotoChange}
             />
           )}
         </main>
