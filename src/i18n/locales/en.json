@@ -129,7 +129,13 @@
       "coverPhoto": "Cover photo",
       "uploadNewPhoto": "Upload new photo",
       "coverPhotoAlt": "Event cover photo",
-      "noPhotoPlaceholder": "No photo selected"
+      "noPhotoPlaceholder": "Click to upload a photo",
+      "uploading": "Uploading...",
+      "uploadSuccess": "Photo uploaded successfully!",
+      "uploadFailed": "Failed to upload photo. Please try again.",
+      "invalidFileType": "Please select an image file",
+      "fileTooLarge": "File is too large. Maximum size is 5MB.",
+      "removePhoto": "Remove photo"
     },
     "activities": {
       "hiking": "Hiking",

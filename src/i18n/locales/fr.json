@@ -129,7 +129,13 @@
       "coverPhoto": "Photo de couverture",
       "uploadNewPhoto": "Télécharger une nouvelle photo",
       "coverPhotoAlt": "Photo de couverture de l'événement",
-      "noPhotoPlaceholder": "Aucune photo sélectionnée"
+      "noPhotoPlaceholder": "Cliquez pour télécharger une photo",
+      "uploading": "Téléchargement...",
+      "uploadSuccess": "Photo téléchargée avec succès !",
+      "uploadFailed": "Échec du téléchargement. Veuillez réessayer.",
+      "invalidFileType": "Veuillez sélectionner un fichier image",
+      "fileTooLarge": "Le fichier est trop volumineux. Taille maximale : 5 Mo.",
+      "removePhoto": "Supprimer la photo"
     },
     "activities": {
       "hiking": "Randonnée",
