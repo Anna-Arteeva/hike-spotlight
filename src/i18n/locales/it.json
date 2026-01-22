@@ -94,7 +94,8 @@
     "step2": {
       "title": "Scegli un percorso per il tuo gruppo",
       "subtitle": "Seleziona dai tuoi percorsi salvati o sfoglia quelli popolari",
-      "placeholder": "Selezione percorso in arrivo..."
+      "placeholder": "Selezione percorso in arrivo...",
+      "selected": "Selezionato"
     },
     "step3": {
       "title": "Quando parti?",

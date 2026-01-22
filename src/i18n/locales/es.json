@@ -94,7 +94,8 @@
     "step2": {
       "title": "Elige una ruta para tu grupo",
       "subtitle": "Selecciona de tus rutas guardadas o explora las populares",
-      "placeholder": "Selección de ruta próximamente..."
+      "placeholder": "Selección de ruta próximamente...",
+      "selected": "Seleccionado"
     },
     "step3": {
       "title": "¿Cuándo sales?",
