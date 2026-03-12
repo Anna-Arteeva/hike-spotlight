@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import Header from "@/components/Header";
+import SiteHeader from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
