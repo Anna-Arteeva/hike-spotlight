@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Search } from "lucide-react";
-import CreateEventModal from "@/components/CreateEventModal";
+import { CreateEventModal } from "@/components/create-event";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import type { Difficulty } from "@/types/route";
 import { MemoryRouter } from "react-router-dom";
 import { ActiveFilterChips } from "@/components/routes/ActiveFilterChips";
 import { DependentSelect } from "@/components/routes/DependentSelect";
@@ -379,14 +380,14 @@ export const DependentSelectEdgeCase: Story = {
 
 export const DifficultyChipsPrimary: Story = {
   render: () => {
-    const [selected, setSelected] = useState(["T2"]);
+    const [selected, setSelected] = useState<Difficulty[]>(["T2"]);
     return <DifficultyChips selected={selected} onChange={setSelected} />;
   },
 };
 
 export const DifficultyChipsSecondary: Story = {
   render: () => {
-    const [selected, setSelected] = useState(["T4", "T5"]);
+    const [selected, setSelected] = useState<Difficulty[]>(["T4", "T5"]);
     return <DifficultyChips selected={selected} onChange={setSelected} />;
   },
 };
