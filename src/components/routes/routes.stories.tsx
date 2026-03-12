@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
+import type { Difficulty } from "@/types/route";
 import { MemoryRouter } from "react-router-dom";
 import { ActiveFilterChips } from "@/components/routes/ActiveFilterChips";
 import { DependentSelect } from "@/components/routes/DependentSelect";
