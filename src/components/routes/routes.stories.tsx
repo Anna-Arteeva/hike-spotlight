@@ -386,7 +386,7 @@ export const DifficultyChipsPrimary: Story = {
 
 export const DifficultyChipsSecondary: Story = {
   render: () => {
-    const [selected, setSelected] = useState(["T4", "T5"]);
+    const [selected, setSelected] = useState<Difficulty[]>(["T4", "T5"]);
     return <DifficultyChips selected={selected} onChange={setSelected} />;
   },
 };
