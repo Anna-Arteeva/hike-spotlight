@@ -379,7 +379,7 @@ export const DependentSelectEdgeCase: Story = {
 
 export const DifficultyChipsPrimary: Story = {
   render: () => {
-    const [selected, setSelected] = useState(["T2"]);
+    const [selected, setSelected] = useState<Difficulty[]>(["T2"]);
     return <DifficultyChips selected={selected} onChange={setSelected} />;
   },
 };
