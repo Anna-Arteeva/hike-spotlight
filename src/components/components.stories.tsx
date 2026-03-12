@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import { MemoryRouter } from "react-router-dom";
-import CreateEventModal from "@/components/CreateEventModal";
+import { CreateEventModal } from "@/components/create-event";
 import EventCard from "@/components/EventCard";
 import SiteHeader from "@/components/SiteHeader";
 import { NavLink } from "@/components/NavLink";

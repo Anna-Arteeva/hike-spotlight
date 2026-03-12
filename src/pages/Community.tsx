@@ -21,7 +21,7 @@ const Community = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <SiteHeader />
 
       <main className="container mx-auto px-6 py-10 space-y-10">
         <section className="grid gap-6 lg:grid-cols-[2fr_1fr]">
