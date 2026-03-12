@@ -15,7 +15,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Mountain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Header from '@/components/Header';
+import SiteHeader from '@/components/SiteHeader';
 import { useRouteFilters } from '@/hooks/useRouteFilters';
 import { routes, filterRoutes, sortRoutes } from '@/lib/routeUtils';
 import { RoutesToolbar } from '@/components/routes/RoutesToolbar';
@@ -41,7 +41,7 @@ export default function RoutesIndex() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <SiteHeader />
 
       <main className="container mx-auto px-4 py-6">
         <RoutesToolbar
